@@ -1,0 +1,2 @@
+-r requirements
+./requirement-packages/PIL-1.1.6-deb64.tar.gz

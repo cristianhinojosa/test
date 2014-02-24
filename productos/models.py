@@ -1,0 +1,23 @@
+from django.db import models
+from django.db.models.fields.related import ForeignKey
+from usuarios.models import Usuario
+from django.utils.translation import ugettext_lazy as _
+
+
+ESTADO = (
+     ('Nuevo', _('Nuevo')),
+     ('Usado', _('Usado')),
+ )
+
+
+class Producto(models.Model):
+    search_fields = ['question_text']
+    nombre =  models.CharField(max_length=200)
+    descripcion = models.CharField(max_length=200)
+    #fotografia = models.ImageField
+    valor = models.IntegerField(default=0)
+    estado = models.CharField(max_length=200,choices=ESTADO)
+    usuario = ForeignKey(Usuario) 
+    fecha = models.DateTimeField('fecha de publicacion del producto', null=False)  
+   
+    
