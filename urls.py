@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from views import index
 
 # Uncomment the next two lines to enable the admin:
 #from django.contrib import admin
@@ -16,7 +17,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     
     
-     #url(r'^$', 'views', name='home'),
+     url(r'^$', index, name='home'),
     
      url(r'^productos/', include('productos.urls')),
      url(r'^admin/', include(admin.site.urls)),
