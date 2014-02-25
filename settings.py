@@ -1,4 +1,5 @@
 # Django settings for website project.
+# cristian hinojosa
 import os
 
 DEBUG = True
