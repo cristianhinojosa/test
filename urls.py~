@@ -18,7 +18,7 @@ urlpatterns = patterns('',
     
     
      url(r'^$', index, name='home'),
-     url(r'^usuarios/', include('usuarios.urls')),
+     url(r'^productos/', include('usuarios.urls')),
      url(r'^productos/', include('productos.urls')),
      url(r'^admin/', include(admin.site.urls)),
 )

@@ -1,4 +1,5 @@
-
+<html>
+<body>
 
 <html>
 <head>
@@ -15,12 +16,21 @@
 </body>
 </html>
 
-{% if latest_question_list %}
-    <ul>
-    {% for producto in latest_question_list %}
-        <li><a href="/productos/{{ producto.id }}/">{{ producto.nombre }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
+{% if results %}
+Se encontraron los siguentes productos:
+<ol>
+{% for result in results %}
+    <li>{{result}}</li>
+{% endfor %}
+</ol>
+
+
+
 {% endif %}
+
+{% if not results %}
+No se encontraron los productos
+{% endif %}
+
+</body>
+</html>

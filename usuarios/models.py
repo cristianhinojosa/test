@@ -10,8 +10,8 @@ class Usuario(models.Model):
     nombre =  models.CharField(max_length=200)
     apellido =  models.CharField(max_length=200)
     direccion = models.CharField(max_length=200)
-    telefono_fijo = models.IntegerField(default='')
-    celular = models.IntegerField(default='')
+    telefono_fijo = models.IntegerField()
+    celular = models.IntegerField()
  
     def __str__(self):
         return '%s %s (%s)'%(self.nombre, self.apellido, self.email)

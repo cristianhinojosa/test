@@ -38,7 +38,7 @@ def busqueda(req):
     if req.GET:
         search_term = req.GET['term']
         results = Producto.objects.filter(nombre=search_term)
-	#return HttpResponse('No se encontraron Productos')
+	return HttpResponse('No se encontraron Productos')
 
     	return render_to_response('productos/search.html', {'results': results})
     else:

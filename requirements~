@@ -5,5 +5,5 @@ Mercurial==2.9
 -e hg+https://bitbucket.org/linguagroup/django-http-proxy@d3587277a5027d4c4c0654d032ac87c4c3c17d20#egg=django_http_proxy-dev
 django-model-utils==1.2.0
 -e git+https://github.com/ibustama/django-phonenumber-field.git@b6f80fe2e563a4063aec97212ad194d33fb72729#egg=django_phonenumber_field-dev
-argparse==1.1
+argparse==1.1.1
 beautifulsoup4==4.2.0

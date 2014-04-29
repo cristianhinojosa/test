@@ -1,0 +1,16 @@
+from django.conf.urls import patterns, url
+
+from usuarios import views
+
+urlpatterns = patterns('',
+    # ex: /polls/
+    url(r'^agregar$', views.agregar, name='agregar'),
+	url(r'^login/$', 'django.contrib.auth.views.login'),
+	url(r'^opciones/$', views.opciones, name='opciones'),
+
+    
+    # ex: /polls/5/results/
+    #url(r'^(?P<producto_id>\d+)/results/$', views.resultado, name='results'),
+    # ex: /polls/5/vote/
+    #url(r'^(?P<producto_id>\d+)/vote/$', views.vote, name='vote'),
+)

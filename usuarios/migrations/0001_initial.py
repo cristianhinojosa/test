@@ -15,8 +15,8 @@ class Migration(SchemaMigration):
             ('nombre', self.gf('django.db.models.fields.CharField')(max_length=200)),
             ('apellido', self.gf('django.db.models.fields.CharField')(max_length=200)),
             ('direccion', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('telefono_fijo', self.gf('django.db.models.fields.IntegerField')(default='')),
-            ('celular', self.gf('django.db.models.fields.IntegerField')(default='')),
+            ('telefono_fijo', self.gf('django.db.models.fields.IntegerField')()),
+            ('celular', self.gf('django.db.models.fields.IntegerField')()),
         ))
         db.send_create_signal('usuarios', ['Usuario'])
 
@@ -31,12 +31,12 @@ class Migration(SchemaMigration):
         'usuarios.usuario': {
             'Meta': {'object_name': 'Usuario'},
             'apellido': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'celular': ('django.db.models.fields.IntegerField', [], {'default': "''"}),
+            'celular': ('django.db.models.fields.IntegerField', [], {}),
             'clave': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'direccion': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'primary_key': 'True'}),
             'nombre': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'telefono_fijo': ('django.db.models.fields.IntegerField', [], {'default': "''"})
+            'telefono_fijo': ('django.db.models.fields.IntegerField', [], {})
         }
     }
 

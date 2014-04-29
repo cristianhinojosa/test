@@ -9,7 +9,7 @@
         <p style="color: red;">Please submit a search term.</p>
     {% endif %}
     <form action="/productos/busqueda/" method="get">
-        <input type="text" name="term">
+        <input type="text" name="q">
         <input type="submit" value="Search">
     </form>
 </body>

@@ -22,11 +22,8 @@ from django.core.context_processors import csrf
 from .forms import MyRegistrationForm
 
 
-from django.contrib.auth.decorators import login_required
 
-@login_required
 def opciones(request):
-
 	pass
 
 def send_registration_confirmation(user):

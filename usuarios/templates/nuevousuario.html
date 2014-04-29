@@ -1,0 +1,19 @@
+
+{% block titulo %} Nuevo Usuario {% endblock %}
+{% block encabezado %}
+	<h1>Registra un nuevo usuario</h1>
+{% endblock %}
+{% block contenido %}
+	
+<form id="form" method="post" action=""> {% csrf_token %} 
+	<table> {{ form }} 
+	 <div class="fieldWrapper">
+            <p></p>
+        </div>
+	</table>
+	<p><input type="submit" value="registrar"></p>
+</form>
+
+
+
+{% endblock %}
