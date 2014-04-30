@@ -170,7 +170,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 
-    'form_utils.forms',
+
     'bs4',
     'captcha',
     'compress',
@@ -183,7 +183,7 @@ INSTALLED_APPS = (
     'tinymce',
     'transmeta',
     'template_utils',
-    'south',
+
     
     'usuarios',
     'productos',

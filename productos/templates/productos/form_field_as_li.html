@@ -1,0 +1,11 @@
+<li>
+    <div class="label">{% if field.field.required %}<span style="color:red"> * </span>{% endif %}{{ field.label_tag }}</div>
+    <div class="input">{{ field }}</div>
+    {% if field.errors %}
+    <div class="errors">
+        {% for error in field.errors %}
+            {{ error }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+</li>

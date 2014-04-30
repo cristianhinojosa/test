@@ -1,0 +1,12 @@
+<fieldset id="{{ fieldset.name }}-fieldset">
+  	<legend><span>{{ fieldset.legend }}</span></legend>
+	<ul class="first column">
+		{% for field in fieldset  %}
+			{% if forloop.counter == column_switch %}
+	</ul>
+	<ul class="column">
+			{% endif %}
+			{% include 'productos/form_field_as_li.html' %}
+		{% endfor %}
+	</ul>
+</fieldset>
