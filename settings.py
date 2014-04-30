@@ -71,12 +71,19 @@ USE_TZ = False
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 
+MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'media/')
+STATIC_ROOT = os.path.join(os.path.dirname(__file__), 'media/static/')
+MEDIA_URL = '/media/'
+STATIC_URL = '/media/static/'
+
+ADMIN_URL = '/admin/'
 
 
   
-MEDIA_ROOT = join(__dir__, 'static')
-MEDIA_URL = '/media/'
-STATIC_URL = '/static/'
+#MEDIA_ROOT = join(__dir__, 'static')
+#MEDIA_ROOT = '/var/www/localhost.com/test/media'
+#MEDIA_URL = '/media.localhost.com'
+#STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
