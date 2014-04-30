@@ -7,7 +7,7 @@ urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
     # ex: /polls/5/
     url(r'^(?P<producto_id>\d+)/$', views.detalle, name='detalle'),
-    
+    url(r'^agregar/$', views.agregar_producto, name='agregar_producto'),
     
     url(r'^busqueda/$', views.busqueda),
     

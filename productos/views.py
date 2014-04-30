@@ -5,6 +5,7 @@ from productos.models import Producto
 from django.shortcuts import get_object_or_404, render, render_to_response
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from productos.forms import ProductosForm
 
 
 
@@ -22,10 +23,12 @@ def detalle(request, producto_id):
 
 
 
-@login_required
+
 def agregar_producto(request):
-        pass
-    
+    if request.method == 'POST':
+        form = ProductosForm(request.POST)   
+        return render_to_response('productos/agregar_producto.html', {'form': form})
+    return render_to_response('productos/agregar_producto.html', {})
         #User = User.objects.get(pk=User)
         
 

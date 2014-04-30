@@ -48,4 +48,5 @@ class Producto(models.Model):
 class AgregarProductoForm(ModelForm):
     class Meta:
         model = Producto
-        fields = ['nombre', 'descripcion', 'valor', 'estado', 'usuario_id', 'fecha', 'imagen_1', 'imagen_2','imagen_3','imagen_4','imagen_5']
+        fields = ['nombre', 'descripcion', 'valor', 'estado', 'usuario', 'imagen_1', 'imagen_2','imagen_3','imagen_4','imagen_5']
+        

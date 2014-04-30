@@ -170,22 +170,24 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 
-
-#     'bs4',
-#    'captcha',
-#    'compress',
-#    'cssutils',
-#    'django_countries',
-#    'filebrowser',
-#    'form_utils',
-#    'httpproxy',
-#    'south',
-#    'tinymce',
-#    'transmeta',
-#    'template_utils',
+    'form_utils.forms',
+    'bs4',
+    'captcha',
+    'compress',
+    'cssutils',
+    'django_countries',
+    'filebrowser',
+    'form_utils',
+    'httpproxy',
     'south',
+    'tinymce',
+    'transmeta',
+    'template_utils',
+    'south',
+    
     'usuarios',
     'productos',
+    
 
 )
 
