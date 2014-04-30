@@ -18,6 +18,8 @@ def detalle(request, producto_id):
     producto = get_object_or_404(Producto, pk=producto_id)
     return render(request, 'productos/detalle.html', {'producto': producto })
 
+def agregar_producto(request):
+    pass
 
 
 #def busqueda(request):
@@ -36,14 +38,14 @@ def detalle(request, producto_id):
 
 def busqueda(req):
     if req.GET:
-        search_term = req.GET['term']
-        results = Producto.objects.filter(nombre=search_term)
-	#return HttpResponse('No se encontraron Productos')
+        q = req.GET['q']
+        results = Producto.objects.filter(nombre=q)
+	       #return HttpResponse('No se encontraron Productos')
 
-    	return render_to_response('productos/search.html', {'results': results})
+        return render_to_response('productos/search.html', {'results': results})
     else:
-    	return HttpResponse('Please submit a search term.')
+        return HttpResponse('Please submit a search term.')
     
-#return render_to_response('productos/search.html', {})
+    return render_to_response('productos/search.html', {})
 
 
