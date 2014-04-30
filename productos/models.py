@@ -8,6 +8,7 @@ from django.db.models.fields.related import ForeignKey
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from settings import MEDIA_ROOT
+from django.forms.models import ModelForm
 #from django.conf.global_settings import MEDIA_ROOT
 #from formatChecker import ContentTypeRestrictedFileField
 
@@ -43,3 +44,8 @@ class Producto(models.Model):
     def __unicode__(self):
         return self.nombre
     
+
+class AgregarProductoForm(ModelForm):
+    class Meta:
+        model = Producto
+        fields = ['nombre', 'descripcion', 'valor', 'estado', 'usuario_id', 'fecha', 'imagen_1', 'imagen_2','imagen_3','imagen_4','imagen_5']

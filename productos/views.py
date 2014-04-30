@@ -3,6 +3,8 @@
 from django.http import HttpResponse
 from productos.models import Producto
 from django.shortcuts import get_object_or_404, render, render_to_response
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -18,8 +20,14 @@ def detalle(request, producto_id):
     producto = get_object_or_404(Producto, pk=producto_id)
     return render(request, 'productos/detalle.html', {'producto': producto })
 
+
+
+@login_required
 def agregar_producto(request):
-    pass
+        pass
+    
+        #User = User.objects.get(pk=User)
+        
 
 
 #def busqueda(request):

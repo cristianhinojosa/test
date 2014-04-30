@@ -23,17 +23,17 @@ from .forms import MyRegistrationForm
 
 
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 
 @login_required
 def opciones(request):
-
 	pass
 
-def send_registration_confirmation(user):
-	p = user.get_profile()
-	title = "Gsick account confirmation"
-	content = "http://www.gsick.com/confirm/" + str(p.confirmation_code) + "/" + user.username
-	send_mail(title, content, 'no-reply@gsick.com', [user.email], fail_silently=False)
+#def send_registration_confirmation(user):
+#	p = user.get_profile()
+#	title = "Gsick account confirmation"
+#	content = "http://www.gsick.com/confirm/" + str(p.confirmation_code) + "/" + user.username
+#	send_mail(title, content, 'no-reply@gsick.com', [user.email], fail_silently=False)
 
 
 
