@@ -75,15 +75,19 @@ MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'media/')
 STATIC_ROOT = os.path.join(os.path.dirname(__file__), 'media/static/')
 MEDIA_URL = '/media/'
 STATIC_URL = '/media/static/'
-
 ADMIN_URL = '/admin/'
 
+JPEG_ROOT = '/usr/local/include'
+ZLIB_ROOT = '/usr/local/include'
 
-  
-#MEDIA_ROOT = join(__dir__, 'static')
-#MEDIA_ROOT = '/var/www/localhost.com/test/media'
-#MEDIA_URL = '/media.localhost.com'
+
+#SETTINGS_DIR = os.path.dirname(os.path.realpath(__file__))
+#BUILDOUT_DIR = os.path.abspath(os.path.join(SETTINGS_DIR, '/var/www/django/test/'))
+#STATIC_ROOT = os.path.join(BUILDOUT_DIR, 'static')
 #STATIC_URL = '/static/'
+#MEDIA_ROOT = os.path.join(BUILDOUT_DIR,  'media')
+#MEDIA_URL = '/media/images/'
+
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -120,16 +124,34 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'urls'
+#ROOT_URLCONF = 'urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'wsgi.application'
+
+#TEMPLATE_DIRS = (
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+#)
+
+
+
+
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    
+    os.path.join(os.path.dirname(__file__), 'templates'),
+    os.path.join(os.path.dirname(__file__), 'templates/beratungstermin'),
+    os.path.join(os.path.dirname(__file__), 'media/uploaded/templates'),
 )
+
+
+
 
 LOCALE_PATHS = (
     os.path.join(os.path.dirname(__file__), 'locale/'),

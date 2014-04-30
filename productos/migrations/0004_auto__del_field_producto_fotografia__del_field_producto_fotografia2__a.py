@@ -8,26 +8,50 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Deleting field 'Producto.user'
-        db.delete_column('productos_producto', 'user_id')
+        # Deleting field 'Producto.fotografia'
+        db.delete_column('productos_producto', 'fotografia')
 
-        # Adding field 'Producto.usuario'
-        db.add_column('productos_producto', 'usuario', self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['auth.User'], unique=True), keep_default=False)
+        # Deleting field 'Producto.fotografia2'
+        db.delete_column('productos_producto', 'fotografia2')
 
-        # Adding field 'Producto.fotografia2'
-        db.add_column('productos_producto', 'fotografia2', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True), keep_default=False)
+        # Adding field 'Producto.imagen_1'
+        db.add_column('productos_producto', 'imagen_1', self.gf('django.db.models.fields.files.ImageField')(default='', max_length=100, blank=True), keep_default=False)
+
+        # Adding field 'Producto.imagen_2'
+        db.add_column('productos_producto', 'imagen_2', self.gf('django.db.models.fields.files.ImageField')(default='', max_length=100, blank=True), keep_default=False)
+
+        # Adding field 'Producto.imagen_3'
+        db.add_column('productos_producto', 'imagen_3', self.gf('django.db.models.fields.files.ImageField')(default='', max_length=100, blank=True), keep_default=False)
+
+        # Adding field 'Producto.imagen_4'
+        db.add_column('productos_producto', 'imagen_4', self.gf('django.db.models.fields.files.ImageField')(default='', max_length=100, blank=True), keep_default=False)
+
+        # Adding field 'Producto.imagen_5'
+        db.add_column('productos_producto', 'imagen_5', self.gf('django.db.models.fields.files.ImageField')(default='', max_length=100, blank=True), keep_default=False)
 
 
     def backwards(self, orm):
         
-        # Adding field 'Producto.user'
-        db.add_column('productos_producto', 'user', self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['auth.User'], unique=True), keep_default=False)
+        # Adding field 'Producto.fotografia'
+        db.add_column('productos_producto', 'fotografia', self.gf('django.db.models.fields.files.FileField')(max_length=100, null=True), keep_default=False)
 
-        # Deleting field 'Producto.usuario'
-        db.delete_column('productos_producto', 'usuario_id')
+        # Adding field 'Producto.fotografia2'
+        db.add_column('productos_producto', 'fotografia2', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True), keep_default=False)
 
-        # Deleting field 'Producto.fotografia2'
-        db.delete_column('productos_producto', 'fotografia2')
+        # Deleting field 'Producto.imagen_1'
+        db.delete_column('productos_producto', 'imagen_1')
+
+        # Deleting field 'Producto.imagen_2'
+        db.delete_column('productos_producto', 'imagen_2')
+
+        # Deleting field 'Producto.imagen_3'
+        db.delete_column('productos_producto', 'imagen_3')
+
+        # Deleting field 'Producto.imagen_4'
+        db.delete_column('productos_producto', 'imagen_4')
+
+        # Deleting field 'Producto.imagen_5'
+        db.delete_column('productos_producto', 'imagen_5')
 
 
     models = {
@@ -46,7 +70,7 @@ class Migration(SchemaMigration):
         },
         'auth.user': {
             'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 4, 29, 17, 27, 15, 103274)'}),
+            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 4, 30, 14, 22, 16, 565691)'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -54,7 +78,7 @@ class Migration(SchemaMigration):
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 4, 29, 17, 27, 15, 103074)'}),
+            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 4, 30, 14, 22, 16, 565497)'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -72,11 +96,14 @@ class Migration(SchemaMigration):
             'descripcion': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
             'estado': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
             'fecha': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'fotografia': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'null': 'True'}),
-            'fotografia2': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'imagen_1': ('django.db.models.fields.files.ImageField', [], {'default': "''", 'max_length': '100', 'blank': 'True'}),
+            'imagen_2': ('django.db.models.fields.files.ImageField', [], {'default': "''", 'max_length': '100', 'blank': 'True'}),
+            'imagen_3': ('django.db.models.fields.files.ImageField', [], {'default': "''", 'max_length': '100', 'blank': 'True'}),
+            'imagen_4': ('django.db.models.fields.files.ImageField', [], {'default': "''", 'max_length': '100', 'blank': 'True'}),
+            'imagen_5': ('django.db.models.fields.files.ImageField', [], {'default': "''", 'max_length': '100', 'blank': 'True'}),
             'nombre': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'usuario': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'unique': 'True'}),
+            'usuario': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True', 'blank': 'True'}),
             'valor': ('django.db.models.fields.IntegerField', [], {'default': '0'})
         }
     }
