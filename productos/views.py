@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404, render, render_to_response
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from productos.forms import ProductosForm
+from django.core.urlresolvers import reverse_lazy
 
 
 
@@ -24,14 +25,22 @@ def detalle(request, producto_id):
 
 
 
-def agregar_producto(request):
-    if request.method == 'POST':
-        form = ProductosForm(request.POST)   
-        return render_to_response('productos/agregar_producto.html', {'form': form})
-    return render_to_response('productos/agregar_producto.html', {})
-        #User = User.objects.get(pk=User)
-        
+def agregar_producto (FormView):
 
+    template_name = 'productos/agregar_producto.html'
+    form_class = ProductosForm
+    success_url = reverse_lazy('home')
+ 
+    # add the request to the kwargs
+    def get_form_kwargs(self):
+        kwargs = super(agregar_producto, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+    
+    #def form_valid(self, form):
+    #   return HttpResponse('form valid')
+    
+    return render_to_response(template_name, {'form_class':form_class})
 
 #def busqueda(request):
     #return render(request, 'search_form.html')

@@ -9,8 +9,9 @@ from django.contrib.auth.models import User   # fill in custom user info then sa
 from django.contrib.auth.forms import UserCreationForm  
 from productos.models import Producto
 from django.forms.models import ModelForm
-    
+
 from form_utils.forms import BetterModelForm
+    
 
 yearNow = datetime.date.today().year 
 
@@ -29,6 +30,6 @@ class ProductosForm(BetterModelForm):
         fieldsets = [
             ('productos', {
                 'fields': ['nombre', 'descripcion'],
-                'legend': ('Productos'),
-         }),
+                'legend': ('productos'),
+        }),
         ]

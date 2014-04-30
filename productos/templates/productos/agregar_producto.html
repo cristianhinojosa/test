@@ -8,7 +8,7 @@
 	<form method="post" action="">
 	{% csrf_token %}
 			<div id="personal_info">
-				{% with fieldset=productos.fieldsets.productos  column_switch=7 %}
+				{% with fieldset=ProductosForm.fieldsets.productos  column_switch=7 %}
 					{% include 'productos/fieldset.html' %}
 				{% endwith %}
 	    	</div>
