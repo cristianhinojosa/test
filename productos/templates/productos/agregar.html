@@ -1,6 +1,6 @@
-{% block titulo %} Nuevo Usuario {% endblock %}
+{% block titulo %} <title>Nuevo Producto</title>{% endblock %}
 {% block encabezado %}
-	<h1>Registra un nuevo usuario</h1>
+	<h1>Publica un nuevo producto</h1>
 {% endblock %}
 {% block contenido %}
 	
@@ -21,28 +21,3 @@
 
 {% endblock %}
 
-
-{% if form.non_field_errors %}{{ form.non_field_errors }}{% endif %}
-{% for fieldset in form.fieldsets %}
-  <fieldset class="{{ fieldset.classes }}">
-  {% if fieldset.legend %}
-    <legend>{{ fieldset.legend }}</legend>
-  {% endif %}
-  {% if fieldset.description %}
-    <p class="description">{{ fieldset.description }}</p>
-  {% endif %}
-  <ul>
-  {% for field in fieldset %}
-    {% if field.is_hidden %}
-      {{ field }}
-    {% else %}
-      <li{{ field.row_attrs }}>
-        {{ field.errors }}
-        {{ field.label_tag }}
-        {{ field }}
-      </li>
-    {% endif %}
-  {% endfor %}
-  </ul>
-  </fieldset>
-{% endfor %}

@@ -40,7 +40,7 @@ class AgregarProductoView(TemplateView):
         if context['producto_form'].is_valid():
             producto = context['producto_form'].save(commit=False)
             producto.save()
-            return render_to_response('budget_request/budget-request-success.html', {'producto':producto }, context_instance=RequestContext(self.request))
+            return render_to_response('productos/producto-ok.html', {'producto':producto }, context_instance=RequestContext(self.request))
         return self.render_to_response(context)
     
     def get_context_data(self, **kwargs):

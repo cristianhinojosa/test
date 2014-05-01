@@ -24,12 +24,16 @@ class ProductoForm(BetterModelForm):
         
         self.fields['nombre'].required = True
         self.fields['descripcion'].required = True
+        self.fields['valor'].required = True
+        self.fields['estado'].required = True
+        
+        
 
     class Meta:
         model = Producto
         fieldsets = [
             ('producto', {
-                'fields': ['nombre', 'descripcion'],
+                'fields': ['nombre', 'descripcion','valor', 'estado','imagen_1', ],
                 'legend': ('producto'),
         }),
         ]
