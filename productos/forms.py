@@ -22,8 +22,8 @@ class ProductoForm(BetterModelForm):
     def __init__(self, *args, **kwargs):
         super(ProductoForm, self).__init__(*args, **kwargs)
         
-        self.fields['nombre'].required = False
-        self.fields['descripcion'].required = False
+        self.fields['nombre'].required = True
+        self.fields['descripcion'].required = True
 
     class Meta:
         model = Producto

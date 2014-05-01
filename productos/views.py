@@ -2,6 +2,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
+from django.views.generic import TemplateView
+
 from django.http import HttpResponse
 from productos.models import Producto
 from django.shortcuts import get_object_or_404, render, render_to_response
@@ -9,6 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from forms import ProductoForm
 from django.core.urlresolvers import reverse_lazy
+from django.template.context import RequestContext
 
 
 
@@ -27,16 +30,38 @@ def detalle(request, producto_id):
 
 
 
-def agregar_producto (TemplateView):  
+class AgregarProductoView(TemplateView):  
     template_name = 'productos/agregar.html'
+
+        #kwargs = super(BudgetRequestView, self).get_context_data(**kwargs)
+        
+    def post(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        if context['producto_form'].is_valid():
+            producto = context['producto_form'].save(commit=False)
+            producto.save()
+            return render_to_response('budget_request/budget-request-success.html', {'producto':producto }, context_instance=RequestContext(self.request))
+        return self.render_to_response(context)
+    
+    def get_context_data(self, **kwargs):
+        form_kwargs = {}   
         
         if self.request.method == 'POST':
             form_kwargs['data'] = self.request.POST
-        
+        kwargs = super(AgregarProductoView, self).get_context_data(**kwargs)
         producto_form = ProductoForm(prefix='producto', **form_kwargs)
-        kwargs['productos_form'] = producto_form
-        return kwargs
+   
+        
+        kwargs['producto_form'] = producto_form
     
+        
+        return kwargs
+
+
+    #def get_context_data(self, *args, **kwargs):
+    #    context = super(AgregarProductoView, self).get_context_data(*args, **kwargs)
+    #    context['producto_form'] = ProductoForm
+    #    return context
 
     #return render_to_response('budget_request/budget-request-success.html', {'producto_form': producto_form}, context_instance=RequestContext(self.request))
     

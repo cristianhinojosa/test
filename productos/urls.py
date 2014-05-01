@@ -1,13 +1,15 @@
 from django.conf.urls import patterns, url
 
-from productos import views
+import views
+
+from django.core import urlresolvers
 
 urlpatterns = patterns('',
     # ex: /polls/
     url(r'^$', views.index, name='index'),
     # ex: /polls/5/
     url(r'^(?P<producto_id>\d+)/$', views.detalle, name='detalle'),
-    url(r'^agregar/$', views.agregar_producto, name='agregar_producto'),
+    url(r'^agregar/$', views.AgregarProductoView.as_view(), name='agregar_producto'),
     
     url(r'^busqueda/$', views.busqueda),
     
