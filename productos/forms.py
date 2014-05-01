@@ -33,7 +33,7 @@ class ProductoForm(BetterModelForm):
         model = Producto
         fieldsets = [
             ('producto', {
-                'fields': ['nombre', 'descripcion','valor', 'estado','imagen_1', ],
+                'fields': ['nombre', 'descripcion','valor', 'estado','imagen_1','imagen_2','imagen_3','imagen_4','imagen_5'],
                 'legend': ('producto'),
         }),
         ]

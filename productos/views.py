@@ -58,31 +58,6 @@ class AgregarProductoView(TemplateView):
         return kwargs
 
 
-    #def get_context_data(self, *args, **kwargs):
-    #    context = super(AgregarProductoView, self).get_context_data(*args, **kwargs)
-    #    context['producto_form'] = ProductoForm
-    #    return context
-
-    #return render_to_response('budget_request/budget-request-success.html', {'producto_form': producto_form}, context_instance=RequestContext(self.request))
-    
-    #return self.render_to_response(context)    
-    
-    
-    #if request.method == 'POST': # If the form has been submitted...
-        # ContactForm was defined in the previous section
-    #    form = ProductoForm(request.POST) # A form bound to the POST data
-    #    if form.is_valid(): # All validation rules pass
-    #        # Process the data in form.cleaned_data
-            # ...
-    #        return HttpResponseRedirect('/thanks/') # Redirect after POST
-    #else:
-    #    form = ProductoForm() # An unbound form
-
-    #return render(request, 'productos/agregar.html', {
-    #    'form': form,
-    #})
-
-
     
 def busqueda(req):
     if req.GET:
