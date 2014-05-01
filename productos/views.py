@@ -1,11 +1,13 @@
 
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
 
 from django.http import HttpResponse
 from productos.models import Producto
 from django.shortcuts import get_object_or_404, render, render_to_response
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from productos.forms import ProductosForm
+from forms import ProductoForm
 from django.core.urlresolvers import reverse_lazy
 
 
@@ -25,37 +27,38 @@ def detalle(request, producto_id):
 
 
 
-def agregar_producto (FormView):
-
-    template_name = 'productos/agregar_producto.html'
-    form_class = ProductosForm
-    success_url = reverse_lazy('home')
- 
-    # add the request to the kwargs
-    def get_form_kwargs(self):
-        kwargs = super(agregar_producto, self).get_form_kwargs()
-        kwargs['request'] = self.request
+def agregar_producto (TemplateView):  
+    template_name = 'productos/agregar.html'
+        
+        if self.request.method == 'POST':
+            form_kwargs['data'] = self.request.POST
+        
+        producto_form = ProductoForm(prefix='producto', **form_kwargs)
+        kwargs['productos_form'] = producto_form
         return kwargs
     
-    #def form_valid(self, form):
-    #   return HttpResponse('form valid')
+
+    #return render_to_response('budget_request/budget-request-success.html', {'producto_form': producto_form}, context_instance=RequestContext(self.request))
     
-    return render_to_response(template_name, {'form_class':form_class})
+    #return self.render_to_response(context)    
+    
+    
+    #if request.method == 'POST': # If the form has been submitted...
+        # ContactForm was defined in the previous section
+    #    form = ProductoForm(request.POST) # A form bound to the POST data
+    #    if form.is_valid(): # All validation rules pass
+    #        # Process the data in form.cleaned_data
+            # ...
+    #        return HttpResponseRedirect('/thanks/') # Redirect after POST
+    #else:
+    #    form = ProductoForm() # An unbound form
 
-#def busqueda(request):
-    #return render(request, 'search_form.html')
+    #return render(request, 'productos/agregar.html', {
+    #    'form': form,
+    #})
 
 
-#def busqueda(request):
-#    if 'q' in request.GET and request.GET['q']:
-#        q = request.GET['q']
-#        productos = Producto.objects.filter(nombre__icontains=q)
-#        return render(request, 'productos/busqueda.html',
-#            {'productos': productos, 'query': q})
-#    else:
-#        return HttpResponse('Please submit a search term.')
-
-
+    
 def busqueda(req):
     if req.GET:
         q = req.GET['q']

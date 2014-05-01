@@ -15,12 +15,12 @@ from form_utils.forms import BetterModelForm
 
 yearNow = datetime.date.today().year 
 
-class ProductosForm(BetterModelForm):
+class ProductoForm(BetterModelForm):
     #nombre = forms.CharField(required=True)
     #descripcion = forms.CharField(required=True)
     
     def __init__(self, *args, **kwargs):
-        super(ProductosForm, self).__init__(*args, **kwargs)
+        super(ProductoForm, self).__init__(*args, **kwargs)
         
         self.fields['nombre'].required = False
         self.fields['descripcion'].required = False
@@ -28,8 +28,8 @@ class ProductosForm(BetterModelForm):
     class Meta:
         model = Producto
         fieldsets = [
-            ('productos', {
+            ('producto', {
                 'fields': ['nombre', 'descripcion'],
-                'legend': ('productos'),
+                'legend': ('producto'),
         }),
         ]
