@@ -40,7 +40,7 @@ def AgregarProducto(request):
         form = ProductoForm(request.POST, request.FILES) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
             producto = form.save(commit=False)
-            producto.usuario = request.user
+            producto.usuario = request.user.usuario
             producto.save()
             
         

@@ -5,6 +5,9 @@
     <title>Search</title>
 </head>
 <body>
+	
+	
+	{{ user.usuario.username }}
     {% if error %}
         <p style="color: red;">Please submit a search term.</p>
     {% endif %}
@@ -19,6 +22,17 @@
     <ul>
     {% for producto in latest_question_list %}
         <li><a href="/productos/{{ producto.id }}/">{{ producto.nombre }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No existen productos</p>
+{% endif %}
+
+
+{% if productos_del_usuario %}
+ 	<ul>
+	{% for prod in productos_del_usuario %}
+        <li><a href="/productos/{{ prod.id }}/">{{ prod.nombre }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

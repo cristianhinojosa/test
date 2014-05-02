@@ -24,10 +24,17 @@ from .forms import MyRegistrationForm
 
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
+#import user
+from productos.models import Producto
 
-@login_required
-def opciones(request):
-	pass
+
+@login_required(login_url='/usuarios/login/')
+def panel_usuario(request):
+	productos_del_usuario = Producto.objects.filter(usuario=request.user.usuario.id).order_by('-fecha')[:5]
+	context = {'los_ultimos_productos_que_vende_request': productos_del_usuario}
+	print context
+	return render(request, 'productos/index.html', context)
+	
 
 #def send_registration_confirmation(user):
 #	p = user.get_profile()
@@ -42,7 +49,7 @@ def agregar(request):
         form = MyRegistrationForm(request.POST)     # create form object
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/usuarios/opciones')
+            return HttpResponseRedirect('/usuarios/')
     args = {}
     args.update(csrf(request))
     args['form'] = MyRegistrationForm()

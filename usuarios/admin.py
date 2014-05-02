@@ -8,7 +8,7 @@ from usuarios.models import Usuario
 class UsuarioAdmin(admin.ModelAdmin):
     #fields = ['nombre', 'email']
 
-    list_display = ('nombre', 'apellido','email')
+    list_display = ('username', 'first_name','email')
     search_fields = ['email']
 
 
