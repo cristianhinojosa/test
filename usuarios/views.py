@@ -29,12 +29,10 @@ from productos.models import Producto
 
 
 @login_required(login_url='/usuarios/login/')
-def panel_usuario(request):
-	productos_del_usuario = Producto.objects.filter(usuario=request.user.usuario.id).order_by('-fecha')[:5]
-	context = {'los_ultimos_productos_que_vende_request': productos_del_usuario}
-	print context
+def listar_mis_productos(request):
+	mis_productos = Producto.objects.all().filter(usuario=request.user.usuario.id).order_by('-fecha')[:5]
+	context = {'mis_productos': mis_productos}
 	return render(request, 'productos/index.html', context)
-	
 
 #def send_registration_confirmation(user):
 #	p = user.get_profile()

@@ -1,5 +1,6 @@
 
 
+
 <html>
 <head>
     <title>Search</title>
@@ -7,7 +8,7 @@
 <body>
 	
 	
-	{{ user.usuario.username }}
+	{{ user.usuario }}
     {% if error %}
         <p style="color: red;">Please submit a search term.</p>
     {% endif %}
@@ -18,13 +19,12 @@
 </body>
 </html>
 
-{% if latest_question_list %}
-    <ul>
-    {% for producto in latest_question_list %}
-        <li><a href="/productos/{{ producto.id }}/">{{ producto.nombre }}</a></li>
+{% if mis_productos %}
+ 	<ul>
+	{% for prod in mis_productos %}
+        <li><a href="/productos/{{ prod.id }}/">{{ prod.nombre }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
     <p>No existen productos</p>
 {% endif %}
-
