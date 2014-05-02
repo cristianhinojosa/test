@@ -12,7 +12,7 @@ urlpatterns = patterns('',
    
     
     url(r'^busqueda/$', views.busqueda),
-    #url(r'^agregar/$', views.AgregarProducto, name='agregar_producto'),
-    url(r'^agregar/$', views.AgregarProductoView.as_view(), name='agregar_producto'),
+    url(r'^agregar/$', views.AgregarProducto, name='agregar_producto'),
+    url(r'^agregar_other/$', views.AgregarProductoView.as_view(), name='agregar_producto_view'),
     
 )

@@ -11,23 +11,25 @@ from productos.models import Producto
 from django.forms.models import ModelForm
 
 from form_utils.forms import BetterModelForm
+from form_utils.widgets import ImageWidget
+from django.db.models.fields.files import ImageField
     
 
 yearNow = datetime.date.today().year 
 
-class ProductoForm(BetterModelForm):
+class OtherProductoForm(BetterModelForm):
     #nombre = forms.CharField(required=True)
     #descripcion = forms.CharField(required=True)
+    #imagen_1=forms.ImageField(widget=ImageWidget)
     
     def __init__(self, *args, **kwargs):
-        super(ProductoForm, self).__init__(*args, **kwargs)
-        
+        super(OtherProductoForm, self).__init__(*args, **kwargs)
         self.fields['nombre'].required = True
         self.fields['descripcion'].required = True
         self.fields['valor'].required = True
         self.fields['estado'].required = True
-        
-        
+        #self.fields['imagen_1'].widget = forms.ImageField(widget=ImageWidget)
+       
 
     class Meta:
         model = Producto
@@ -37,3 +39,30 @@ class ProductoForm(BetterModelForm):
                 'legend': ('producto'),
         }),
         ]
+        
+        
+#class ProductoForm(forms.ModelForm):
+
+class ProductoForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        #fields = ['nombre', 'descripcion', 'valor', 'estado', 'usuario', 'imagen_1', 'imagen_2','imagen_3','imagen_4','imagen_5']
+        exclude = ('usuario',)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

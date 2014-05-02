@@ -1,27 +1,29 @@
 {% block titulo %} <title>Nuevo Producto</title>{% endblock %}
 {% block encabezado %}
+
+
+{% if user.is_authenticated %}
 	<h1>Publica un nuevo producto</h1>
+	
+	{% else %}
+	
+	 Debe autentificarse primero
+{% endif %}
+
 {% endblock %}
 {% block contenido %}
 	
-	
-	<form method="post" action="">
-	{% csrf_token %}
-			<div id="personal_info">
-				{% with fieldset=producto_form.fieldsets.producto  column_switch=2 %}
-					{% include 'productos/fieldset.html' %}
-				{% endwith %}
-	    	</div>
-        </div>
-	</table>
-	<p><input type="submit" value="registrar"></p>
-</form>
+
+
+
 
 
 
 {% endblock %}
+{% if user.is_authenticated %}
+	<form action="" method="post"  enctype="multipart/form-data">{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="Submit" />
+	</form>
 
-<form action="/contact/" method="post">{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Submit" />
-</form>
+{% endif %}

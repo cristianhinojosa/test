@@ -80,6 +80,7 @@ ADMIN_URL = '/admin/'
 JPEG_ROOT = '/usr/local/include'
 ZLIB_ROOT = '/usr/local/include'
 
+HOME = 'http://127.0.0.1:8000/'
 
 #SETTINGS_DIR = os.path.dirname(os.path.realpath(__file__))
 #BUILDOUT_DIR = os.path.abspath(os.path.join(SETTINGS_DIR, '/var/www/django/test/'))

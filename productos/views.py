@@ -12,6 +12,8 @@ from django.contrib.auth.decorators import login_required
 from forms import ProductoForm
 from django.core.urlresolvers import reverse_lazy
 from django.template.context import RequestContext
+from productos.forms import OtherProductoForm
+from settings import HOME
 
 
 
@@ -30,15 +32,36 @@ def detalle(request, producto_id):
 
 
 
+        
+        
+def AgregarProducto(request):
+    if request.method == 'POST': # If the form has been submitted...
+        # ContactForm was defined in the previous section
+        form = ProductoForm(request.POST, request.FILES) # A form bound to the POST data
+        if form.is_valid(): # All validation rules pass
+            producto = form.save(commit=False)
+            producto.usuario = request.user
+            producto.save()
+            
+        
+            #producto.save()
+            return HttpResponseRedirect(HOME) # Redirect after POST
+    else:
+        form = ProductoForm() # An unbound form
+
+    return render(request, 'productos/agregar.html', {
+        'form': form,
+    })
+
 class AgregarProductoView(TemplateView):  
-    template_name = 'productos/agregar.html'
+    template_name = 'productos/agregar_other.html'
 
         #kwargs = super(BudgetRequestView, self).get_context_data(**kwargs)
         
     def post(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
-        if context['producto_form'].is_valid():
-            producto = context['producto_form'].save(commit=False)
+        if context['form'].is_valid():
+            producto = context['form'].save(commit=False)
             producto.save()
             return render_to_response('productos/producto-ok.html', {'producto':producto }, context_instance=RequestContext(self.request))
         return self.render_to_response(context)
@@ -49,14 +72,16 @@ class AgregarProductoView(TemplateView):
         if self.request.method == 'POST':
             form_kwargs['data'] = self.request.POST
         kwargs = super(AgregarProductoView, self).get_context_data(**kwargs)
-        producto_form = ProductoForm(prefix='producto', **form_kwargs)
+        form = OtherProductoForm(prefix='producto', **form_kwargs)
    
         
-        kwargs['producto_form'] = producto_form
+        kwargs['form'] = form
     
         
         return kwargs
 
+        
+       
 
     
 def busqueda(req):

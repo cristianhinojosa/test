@@ -1,0 +1,47 @@
+
+
+{% if user.is_authenticated %}
+	<form method="post" action="" enctype="multipart/form-data">
+	{% csrf_token %}
+			<div id="personal_info">
+				{% with fieldset=producto_form.fieldsets.producto  column_switch=2 %}
+					{% include 'productos/fieldset.html' %}
+				{% endwith %}
+	    	</div>
+        </div>
+	</table>
+	<p><input type="submit" value="registrar"></p>
+</form>
+{% endif %}
+
+------------------------------------------------------------------------
+
+<form method="post" action="" enctype="multipart/form-data">
+{% csrf_token %}
+{% if form.non_field_errors %}{{ form.non_field_errors }}{% endif %}
+{% for fieldset in form.fieldsets %}
+  <fieldset class="{{ fieldset.classes }}">
+  {% if fieldset.legend %}
+    <legend>{{ fieldset.legend }}</legend>
+  {% endif %}
+  {% if fieldset.description %}
+    <p class="description">{{ fieldset.description }}</p>
+  {% endif %}
+  <ul>
+  {% for field in fieldset %}
+    {% if field.is_hidden %}
+      {{ field }}
+    {% else %}
+      <li{{ field.row_attrs }}>
+        {{ field.errors }}
+        {{ field.label_tag }}
+        {{ field }}
+      </li>
+    {% endif %}
+  {% endfor %}
+  </ul>
+  </fieldset>
+{% endfor %}
+<p><input type="submit" value="registrar_2"></p>
+</form>
+	
