@@ -24,5 +24,6 @@ urlpatterns = patterns('',
      url(r'^usuarios/', include('usuarios.urls')),
      url(r'^productos/', include('productos.urls')),
      url(r'^admin/', include(admin.site.urls)),
+     url(r'^accounts/', include('registration.urls')),
      url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT}),
 )

@@ -2,7 +2,31 @@
 # cristian hinojosa
 #import os
 from os.path import dirname, join, abspath, os
+from smtplib import SMTPAuthenticationError
 __dir__ = dirname(abspath(__file__))
+
+
+ACCOUNT_ACTIVATION_DAYS=7
+
+
+#EMAIL_HOST = "localhost"
+SERVER_EMAIL = 'cristian.hinojosa@gmail.com'
+DEFAULT_FROM_EMAIL = 'cristian.hinojosa@gmail.com'
+SEND_BROKEN_LINK_EMAILS = False 
+EMAIL_SEND_CONFIRMATION = True     # Whether to send a booking confirmation mail to the customer
+EMAIL_SEND_NOTIFICATION = True     # Whether to send a notification mail to the consultant
+EMAIL_HOST = 'smtp.gmail.com'  # smtp host
+EMAIL_USE_TLS = True 
+EMAIL_PORT = 587                    # smtp port
+EMAIL_HOST_USER = 'cristian.hinojosa@gmail.com' # smtp host user name
+EMAIL_HOST_PASSWORD = '!16074228-3'    # smtp host password
+EMAIL_SENDER_NAME = 'Cristian Hinojosa Site' # displayed name in the emails
+EMAIL_SENDER = 'cristian.hinojosa@gmail.com'    # mail address that sends booking confirmations
+EMAIL_FAIL_SILENTLY = False        # set to false for debugging
+
+
+
+
 
 
 DEBUG = True
@@ -152,6 +176,14 @@ TEMPLATE_DIRS = (
 )
 
 
+#EMAIL_HOST = 'localhost'
+#EMAIL_PORT = 1025
+#EMAIL_HOST_USER = ""
+#EMAIL_HOST_PASSWORD = ""
+#EMAIL_USE_TLS = False
+#DEFAULT_FROM_EMAIL = 'testing@example.com'
+
+
 
 
 LOCALE_PATHS = (
@@ -166,8 +198,10 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     # Uncomment the next line to enable the admin:
      'django.contrib.admin',
+     'registration',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 
