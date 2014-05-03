@@ -19,7 +19,7 @@ EMAIL_HOST = 'smtp.gmail.com'  # smtp host
 EMAIL_USE_TLS = True 
 EMAIL_PORT = 587                    # smtp port
 EMAIL_HOST_USER = 'cristian.hinojosa@gmail.com' # smtp host user name
-EMAIL_HOST_PASSWORD = '!16074228-3'    # smtp host password
+EMAIL_HOST_PASSWORD = ''  # smtp host password
 EMAIL_SENDER_NAME = 'Cristian Hinojosa Site' # displayed name in the emails
 EMAIL_SENDER = 'cristian.hinojosa@gmail.com'    # mail address that sends booking confirmations
 EMAIL_FAIL_SILENTLY = False        # set to false for debugging
@@ -43,7 +43,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'proyecto_django_dev',                      # Or path to database file if using sqlite3.
         'USER': 'root',                      # Not used with sqlite3.
-        'PASSWORD': 'sroot',                  # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -176,12 +176,7 @@ TEMPLATE_DIRS = (
 )
 
 
-#EMAIL_HOST = 'localhost'
-#EMAIL_PORT = 1025
-#EMAIL_HOST_USER = ""
-#EMAIL_HOST_PASSWORD = ""
-#EMAIL_USE_TLS = False
-#DEFAULT_FROM_EMAIL = 'testing@example.com'
+
 
 
 
