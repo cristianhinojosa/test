@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from settings import MEDIA_ROOT
 from django.forms.models import ModelForm
+
 from usuarios.models import Usuario
 from django.core.exceptions import ValidationError
 
@@ -33,7 +34,7 @@ class Producto(models.Model):
         filesize = self.file.size
         megabyte_limit = 1.0
         if filesize > megabyte_limit*1024*1024:
-            raise ValidationError("El archivo debe pesar como maximo %sMB" % str(megabyte_limit))
+            raise ValidationError("La imagen debe pesar como maximo %sMB" % str(megabyte_limit))
 
     
     
