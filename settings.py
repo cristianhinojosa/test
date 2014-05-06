@@ -1,10 +1,14 @@
-# Django settings for website project.
-# cristian hinojosa
-#import os
-from os.path import dirname, join, abspath, os
-from smtplib import SMTPAuthenticationError
-__dir__ = dirname(abspath(__file__))
+#-*- coding: utf-8 -*-
+import os
 
+#from os.path import dirname, join, abspath, os
+#from smtplib import SMTPAuthenticationError
+#__dir__ = dirname(abspath(__file__))
+
+#MAX_UPLOAD_SIZE = 1024880
+
+
+MAX_UPLOAD_SIZE = 1024*1024
 
 ACCOUNT_ACTIVATION_DAYS=7
 
@@ -24,13 +28,25 @@ EMAIL_SENDER_NAME = 'Cristian Hinojosa Site' # displayed name in the emails
 EMAIL_SENDER = 'cristian.hinojosa@gmail.com'    # mail address that sends booking confirmations
 EMAIL_FAIL_SILENTLY = False        # set to false for debugging
 
+DEFAULT_CHARSET = 'utf-8'
+FILE_CHARSET = 'utf-8'
 
 
 
+LANGUAGES = (
+  ('es', u'Español'),
+  ('en', ('English')),
+)
 
+
+
+LOCALE_PATHS = (
+    os.path.join(os.path.dirname(__file__), 'locale/'),
+)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+DEBUG_SQL = True # show sql queries
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -145,6 +161,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    
+    
+    'django.middleware.locale.LocaleMiddleware',
+    
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
