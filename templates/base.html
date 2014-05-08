@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="{{ LANGUAGE_CODE }}">
+<html lang="es">
 <head>
 {% load compressed %}
 {% load i18n cache %}
@@ -36,19 +36,27 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
+
   
   
   
     <style type="text/css">
     	body{ padding: 70px 0px; }
+    	
+   .navbar .navbar-form{
+    padding: 0 15px;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+    	
     </style>
 
   </head>
 
   <body>
-
-        <div class="navbar navbar-inverse navbar-fixed-top">
+<!--
+      <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -66,11 +74,41 @@
 		 <li><a href="#about">Contacto</a></li>
             <li><a href="#contact">Registrate</a></li>
           </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
+        </div>
+-->
 
-   
+ <div class="navbar navbar-inverse navbar-fixed-top">
+ <div class="container">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>    
+  </div>
+  <a class="navbar-brand" href="#">Todo-Avisos.cl</a>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav navbar-left">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#about">Productos</a></li>
+        <li><a href="#about">Test</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+    	
+    	<form action="" method="get">
+	     <input type="text" name="q">
+     	<button class="forward"  type="submit"><span class="glyphicon glyphicon-search"></span> </button>
+     </form>
+    </ul>
+  </div>
+</nav>        
+       
+        
+       </div>
+      </div>
+    </div> 
+    
+
 
   
   
