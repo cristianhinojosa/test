@@ -15,17 +15,32 @@
 	    {% if error %}
 	        <p style="color: red;">Please submit a search term.</p>
 	    {% endif %}
-	    <form action="/productos/busqueda/" method="get">
+	    <form action="" method="get">
 	        <input type="text" name="q">
-	        <input type="submit" value="Search">
+	        <!--
+	       	 <button type="submit" class="btn btn-primary">Buscar</button>
+	       	<button type="submit" class="btn btn-primary">Buscar</button>
+	       	-->
+	       	<button class="forward"  type="submit"><span class="glyphicon glyphicon-search"></span> </button>
+	       	 
 	    </form>
-	
+		
 	
 	    <ul>
 	    {% for producto in latest_question_list %}
 	        <li><a href="/productos/{{ producto.id }}/">{{ producto.nombre }}</a></li>
 	    {% endfor %}
 	    </ul>
+	
+	
+	{% elif results %}
+	Se encontraron los siguentes productos:
+	<ol>
+	{% for result in results %}
+	    <li>{{result}}</li>
+	{% endfor %}
+	</ol>
+
 	
 	
 	{% else %}

@@ -164,7 +164,7 @@ MIDDLEWARE_CLASSES = (
     
     
     'django.middleware.locale.LocaleMiddleware',
-    'extended_flatpages.middleware.FlatpageFallbackMiddleware',
+    #'extended_flatpages.middleware.FlatpageFallbackMiddleware',
     
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
