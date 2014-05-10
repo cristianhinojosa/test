@@ -47,6 +47,9 @@ activate_this = os.path.join(path_to_my_site, "bin/activate_this.py")
 execfile(activate_this, dict(__file__=activate_this))
 
 # insert project path to sys path
+sys.path.append('/var/www/')
+sys.path.append('/var/www/django/test')
+
 path = '/var/www/django/test/'
 if path not in sys.path:
     sys.path.insert(0, path)
