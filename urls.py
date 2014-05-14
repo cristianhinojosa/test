@@ -20,9 +20,9 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     
     
-     url(r'^$', index, name='home'),
-     url(r'^usuarios/', include('usuarios.urls')),
-     url(r'^productos/', include('productos.urls')),
+     url(r'^$', index, name='home_page'),
+     url(r'^usuarios/', include('usuarios.urls') ),
+     url(r'^productos/', include('productos.urls', namespace='productos')),
      url(r'^admin/', include(admin.site.urls)),
      url(r'^accounts/', include('registration.urls')),
      #url(r'^pages/', include('django.contrib.flatpages.urls')),

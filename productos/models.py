@@ -48,11 +48,11 @@ class Producto(models.Model):
 
     
     
-    nombre =  models.CharField(max_length=200)
-    descripcion = models.CharField(max_length=200)
-    valor = models.IntegerField(default=0)
-    estado_producto = models.CharField(max_length=200,choices=ESTADO_PRODUCTO)
-    estado_publicacion = models.CharField(max_length=200,choices=ESTADO_PUBLICACION)
+    nombre =  models.CharField(max_length=200, null=True, blank=True)
+    descripcion = models.CharField(max_length=200, null=True, blank=True)
+    valor = models.IntegerField(default='',  null=True, blank=True)
+    estado_producto = models.CharField(max_length=200,choices=ESTADO_PRODUCTO, null=True, blank=True)
+    estado_publicacion = models.CharField(max_length=200,choices=ESTADO_PUBLICACION,  null=True, blank=True)
     usuario = ForeignKey(User,  null=True, blank=True) 
     fecha = models.DateTimeField(_("Date"), auto_now_add=True, null=False)
        

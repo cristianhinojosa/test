@@ -31,7 +31,8 @@ class OtherProductoForm(BetterModelForm):
         model = Producto
         fieldsets = [
             ('producto', {
-                'fields': ['nombre', 'descripcion','valor', 'estado','imagen_1','imagen_2','imagen_3','imagen_4','imagen_5'],
+                #'fields': ['nombre', 'descripcion','valor', 'estado','imagen_1','imagen_2','imagen_3','imagen_4','imagen_5'],
+                'fields': ['nombre', 'descripcion','valor', 'estado_publicacion','imagen_1'],
                 'legend': ('producto'),
         }),
         ]
@@ -45,7 +46,7 @@ class ProductoForm(forms.ModelForm):
     class Meta:
         model = Producto
         #fields = ['nombre', 'descripcion', 'valor', 'estado', 'usuario', 'imagen_1', 'imagen_2','imagen_3','imagen_4','imagen_5']
-        exclude = ('usuario',)
+        exclude = ('usuario', 'estado_publicacion')
     
         
      

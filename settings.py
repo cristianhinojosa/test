@@ -23,7 +23,7 @@ EMAIL_HOST = 'smtp.gmail.com'  # smtp host
 EMAIL_USE_TLS = True 
 EMAIL_PORT = 587                    # smtp port
 EMAIL_HOST_USER = 'cristian.hinojosa@gmail.com' # smtp host user name
-EMAIL_HOST_PASSWORD = '!pitinix1397'  # smtp host password
+EMAIL_HOST_PASSWORD = ''  # smtp host password
 EMAIL_SENDER_NAME = 'Cristian Hinojosa Site' # displayed name in the emails
 EMAIL_SENDER = 'cristian.hinojosa@gmail.com'    # mail address that sends booking confirmations
 EMAIL_FAIL_SILENTLY = False        # set to false for debugging
@@ -50,6 +50,24 @@ DEBUG_SQL = True # show sql queries
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.media',
+    'django.core.context_processors.request',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    
+  #  'library.context_processors.project_urls',
+  #  'library.context_processors.alternate_sites',
+   # 'library.context_processors.dates',
+   # 'library.context_processors.template_widget',
+   # 'library.context_processors.destination_lists',
+   # 'phone_numbers.context_processors.phone_numbers',
+   # 'destinations.context_processors.countries',
 )
 
 MANAGERS = ADMINS

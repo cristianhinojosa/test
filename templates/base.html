@@ -1,8 +1,12 @@
 ﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="es">
 <head>
+{% load url from future %}
 {% load compressed %}
 {% load i18n cache %}
+{% url 'home_page' as home_url %}
+{% url 'productos:productos_index' as productos_url %}
+
 <title>{% block title %}{% trans 'Compra y vendes lo que quieras' %}{% endblock %}</title>
 
 {% block meta %}
@@ -89,8 +93,8 @@
   <a class="navbar-brand" href="#">Todo-Avisos.cl</a>
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-left">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#about">Productos</a></li>
+        <li class="{% ifequal request.path home_url %}active{% endifequal %}"><a href="{{ home_url }}"> Home</a></li>
+        <li class="{% ifequal request.path productos_url %}active{% endifequal %}"><a href="{{ productos_url }}"> Productos</a></li>
         <li><a href="#about">Test</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
@@ -117,7 +121,6 @@
  
   
 
-<!---  <h1>Hello, world!</h1> -->
 
 
    
