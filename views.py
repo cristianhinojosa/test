@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.utils.translation import ugettext_lazy as _
+from django.shortcuts import render
 #from productos.models import Producto
 
 # 
@@ -11,4 +12,5 @@ from django.utils.translation import ugettext_lazy as _
 
 
 def index(request):
-    return HttpResponse("Hello, world. index.")
+    #return HttpResponse("Hello, world. index.")
+    return render(request, 'index.html')
