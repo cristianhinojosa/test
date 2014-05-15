@@ -4,9 +4,10 @@ from django import forms
 from django.forms import extras, widgets
 import datetime
 from productos import RestrictedImageField
-from productos.models import Producto
+from productos.models import Producto, REGION_CHOICES
 from form_utils.forms import BetterModelForm
 from django.core.exceptions import ValidationError
+#from django.contrib.localflavor.be.be_regions import REGION_CHOICES
 
 
 
@@ -39,7 +40,18 @@ class OtherProductoForm(BetterModelForm):
         
   
 
-
+class SearchProducts(forms.Form):
+    buscar = forms.CharField(max_length=100)
+    regiones  = forms.ChoiceField(label="Regiones", choices=(REGION_CHOICES),
+                                       widget=forms.Select(attrs={'class':'selector'}))
+    
+    
+    #def __init__(self, *args, **kwargs):
+    #    super(SearchProducts, self).__init__(*args, **kwargs)
+    #    choices = [(pt.id, unicode(pt)) for pt in Producto.objects.all()]
+    #    choices.extend(REGION_CHOICES)
+    #    self.fields['regiones'].choices = choices
+    
 
 
 class ProductoForm(forms.ModelForm):

@@ -26,7 +26,7 @@ ESTADOS_PUBLICACION = (
      ('visible', _('Visible')),
      ('oculto', _('Oculto')),
      ('vendido', _('Vendido')),
-     ('Comprado', _('Comprar')),
+     ('Comprado', _('Comprado')),
  )
 
 

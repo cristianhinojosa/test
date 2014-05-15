@@ -12,22 +12,46 @@ from django.contrib.auth.decorators import login_required
 from forms import ProductoForm
 from django.core.urlresolvers import reverse_lazy
 from django.template.context import RequestContext
-from productos.forms import OtherProductoForm
+from productos.forms import OtherProductoForm, SearchProducts
 from settings import HOME, MEDIA_URL
+from django.views.decorators.csrf import csrf_exempt
 
 
+#@csrf_exempt
 def index(req):
     if req.GET:
-        q = req.GET['q']
-        results = Producto.objects.filter(nombre=q)
-           #return HttpResponse('No se encontraron Productos')
+        buscar = req.GET['buscar']
+        regiones = req.GET['regiones']
+        form = SearchProducts() 
+        
+        results = Producto.objects.filter(nombre=buscar).filter(region=regiones)
+        #return HttpResponse('No se encontraron Productos')
 
-        return render_to_response('productos/index.html', {'results': results})
+        #return render_to_response('productos/index.html', {'results': results})
+        
+        return render_to_response('productos/index.html', {
+                                    'results': results,
+                                     'form': form,
+                                    
+                                    }, context_instance=RequestContext(req))
+
     else:
+        
+        form = SearchProducts() # An unbound form
+        all_productos = Producto.objects.all().order_by('-fecha')
+
+    return render(req, 'productos/index.html', {
+        'form': form,
+        'all_productos': all_productos,
+    })
+        
+        
+        
+        
         #return HttpResponse('Please submit a search term.')
-        latest_question_list = Producto.objects.all().order_by('-fecha')
-        context = {'latest_question_list': latest_question_list}
-    return render(req, 'productos/index.html', context)
+        #latest_question_list = Producto.objects.all().order_by('-fecha')
+        #context = {'latest_question_list': latest_question_list}
+    #return render(req, 'productos/index.html', context)
     
     
     #return render_to_response('productos/search.html', {})

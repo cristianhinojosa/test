@@ -9,29 +9,25 @@
 	
 	
 	
-	{% if latest_question_list %}
-	
-		{{ user.usuario.username }}
-	    {% if error %}
-	        <p style="color: red;">Please submit a search term.</p>
-	    {% endif %}
-	    <form action="" method="get">
-	        <input type="text" name="q">
-	        <!--
-	       	 <button type="submit" class="btn btn-primary">Buscar</button>
-	       	<button type="submit" class="btn btn-primary">Buscar</button>
-	       	-->
-	       	<button class="forward"  type="submit"><span class="glyphicon glyphicon-search"></span> </button>
-	       	 
-	    </form>
+
+		{{ user.username }}
 		
+		
+
+		
+		<form action="" method="get">
+		{{ form.as_p }}
+		<input type="submit" value="Submit" />
+		</form>
+
+
+	{% if all_productos %}
 	
-	    <ul>
-	    {% for producto in latest_question_list %}
+	   <ul>
+	    {% for producto in all_productos %}
 	        <li><a href="/productos/{{ producto.id }}/">{{ producto.nombre }}</a></li>
 	    {% endfor %}
 	    </ul>
-	
 	
 	{% elif results %}
 	Se encontraron los siguentes productos:
@@ -46,6 +42,8 @@
 	{% else %}
 	    <p>No existen productos</p>
 	{% endif %}
+
+
 
 {% endblock %}
 
