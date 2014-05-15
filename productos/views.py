@@ -15,6 +15,7 @@ from django.template.context import RequestContext
 from productos.forms import OtherProductoForm, SearchProducts
 from settings import HOME, MEDIA_URL
 from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator, EmptyPage, InvalidPage
 
 
 #@csrf_exempt
@@ -24,13 +25,29 @@ def index(req):
         regiones = req.GET['regiones']
         form = SearchProducts() 
         
-        results = Producto.objects.filter(nombre=buscar).filter(region=regiones)
+        #all_productos = Producto.objects.filter(nombre=buscar).filter(region=regiones)
+        all_productos = Producto.objects.all()
+        
+        #all_productos = Paginator(all_productos, 1)
         #return HttpResponse('No se encontraron Productos')
-
         #return render_to_response('productos/index.html', {'results': results})
         
+         
+        paginator = Paginator(all_productos, 2)
+    
+        try:
+            page = int(req.GET.get('page', '1'))
+        except ValueError:
+            page = 1
+    
+        try:
+            fp = paginator.page(page)
+        except (EmptyPage, InvalidPage):
+            fp = paginator.page(paginator.num_pages)
+        
         return render_to_response('productos/index.html', {
-                                    'results': results,
+             #                       'all_productos': all_productos,
+                                    'mydata': fp,
                                      'form': form,
                                     
                                     }, context_instance=RequestContext(req))

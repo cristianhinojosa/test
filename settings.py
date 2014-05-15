@@ -239,7 +239,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 
-
+  #  'pagination',
     'bs4',
     'captcha',
     'compress',

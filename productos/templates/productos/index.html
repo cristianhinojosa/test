@@ -21,27 +21,40 @@
 		</form>
 
 
-	{% if all_productos %}
-	
-	   <ul>
-	    {% for producto in all_productos %}
-	        <li><a href="/productos/{{ producto.id }}/">{{ producto.nombre }}</a></li>
-	    {% endfor %}
-	    </ul>
-	
-	{% elif results %}
-	Se encontraron los siguentes productos:
-	<ol>
-	{% for result in results %}
-	    <li>{{result}}</li>
-	{% endfor %}
-	</ol>
+{% for data in mydata.object_list %}
 
-	
-	
-	{% else %}
-	    <p>No existen productos</p>
-	{% endif %}
+   <td>{{ data.nombre }}</td>                 
+
+</tr>
+{% endfor %}
+    
+<span>
+{% if mydata.has_previous %}
+    <a href="?page={{ insurance_plan.previous_page_number }}">previous</a>
+{% endif %}
+    
+{% for num in insurance_plan.paginator.page_range %}
+    {% ifequal num insurance_plan.number %}
+        <span class="current page">{{ num }}</span>
+    {% else %}
+        <a href="?page={{ num }}"> {{ num }}</a>
+    {% endifequal %} 
+{% endfor %}
+    
+{% if insurance_plan.has_next %}
+    <a href="?page={{ insurance_plan.next_page_number }}"> Next </a>
+{% endif %}
+</span>
+
+
+
+
+
+
+
+
+
+
 
 
 
