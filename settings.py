@@ -254,11 +254,13 @@ INSTALLED_APPS = (
     'template_utils',
 
     
-    'usuarios',
+    'accounts',
     'productos',
     
 
 )
+
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

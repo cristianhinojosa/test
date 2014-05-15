@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from usuarios import views
+from accounts import views
 
 urlpatterns = patterns('',
     # ex: /polls/

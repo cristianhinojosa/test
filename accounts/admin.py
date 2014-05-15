@@ -1,6 +1,9 @@
 from django.contrib import admin
+from accounts.models import UserProfile
 
-from usuarios.models import Usuario 
+
+#from usuarios.models import Usuario
+
 #from productos.models import Producto 
 
 
@@ -8,9 +11,9 @@ from usuarios.models import Usuario
 class UsuarioAdmin(admin.ModelAdmin):
     #fields = ['nombre', 'email']
 
-    list_display = ('username', 'first_name','email')
+    list_display = ('direccion', 'telefono_fijo','celular')
     search_fields = ['email']
 
 
 
-admin.site.register(Usuario, UsuarioAdmin)
+admin.site.register(UserProfile)

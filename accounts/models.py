@@ -5,11 +5,14 @@ from django.contrib.auth.models import User
 
 
 
-class Usuario(User):
+class UserProfile(models.Model):
     #email = EmailField(primary_key=True)
     #clave = models.CharField(max_length=50)
     #nombre =  models.CharField(max_length=200)
     #apellido =  models.CharField(max_length=200)
+    
+    
+    user = models.OneToOneField(User)
     direccion = models.CharField(max_length=200)
     telefono_fijo = models.IntegerField()
     celular = models.IntegerField()

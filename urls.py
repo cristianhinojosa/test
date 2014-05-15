@@ -21,10 +21,10 @@ urlpatterns = patterns('',
     
     
      url(r'^$', index, name='home_page'),
-     url(r'^usuarios/', include('usuarios.urls') ),
+     url(r'^usuarios/', include('accounts.urls') ),
      url(r'^productos/', include('productos.urls', namespace='productos')),
      url(r'^admin/', include(admin.site.urls)),
-     url(r'^accounts/', include('registration.urls')),
+     url(r'^cuentas/', include('registration.urls', namespace='login' )),
      #url(r'^pages/', include('django.contrib.flatpages.urls')),
      url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT}),
      #url(r'^media/static/bootstap/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT}),

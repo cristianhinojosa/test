@@ -6,6 +6,8 @@
 {% load i18n cache %}
 {% url 'home_page' as home_url %}
 {% url 'productos:productos_index' as productos_url %}
+{% url 'productos:productos_index' as productos_url %}
+
 
 <title>{% block title %}{% trans 'Compra y vendes lo que quieras' %}{% endblock %}</title>
 
@@ -95,7 +97,7 @@
     <ul class="nav navbar-nav navbar-left">
         <li class="{% ifequal request.path home_url %}active{% endifequal %}"><a href="{{ home_url }}"> Home</a></li>
         <li class="{% ifequal request.path productos_url %}active{% endifequal %}"><a href="{{ productos_url }}"> Productos</a></li>
-        <li><a href="#about">Test</a></li>
+        <li><a href="#about">Login</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
     	

@@ -11,17 +11,14 @@ class Migration(SchemaMigration):
         # Adding model 'Producto'
         db.create_table('productos_producto', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('nombre', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('descripcion', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('valor', self.gf('django.db.models.fields.IntegerField')(default=0)),
-            ('estado', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('usuario', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['usuarios.Usuario'], null=True, blank=True)),
+            ('nombre', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
+            ('descripcion', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
+            ('valor', self.gf('django.db.models.fields.IntegerField')(default='0', null=True, blank=True)),
+            ('estado_producto', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
+            ('estado_publicacion', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
+            ('usuario', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
             ('fecha', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('imagen_1', self.gf('django.db.models.fields.files.ImageField')(default='', max_length=100, blank=True)),
-            ('imagen_2', self.gf('django.db.models.fields.files.ImageField')(default='', max_length=100, blank=True)),
-            ('imagen_3', self.gf('django.db.models.fields.files.ImageField')(default='', max_length=100, blank=True)),
-            ('imagen_4', self.gf('django.db.models.fields.files.ImageField')(default='', max_length=100, blank=True)),
-            ('imagen_5', self.gf('django.db.models.fields.files.ImageField')(default='', max_length=100, blank=True)),
+            ('imagen_1', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
         ))
         db.send_create_signal('productos', ['Producto'])
 
@@ -48,7 +45,7 @@ class Migration(SchemaMigration):
         },
         'auth.user': {
             'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 5, 2, 16, 32, 41, 475981)'}),
+            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 5, 14, 22, 50, 26, 880248)'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -56,7 +53,7 @@ class Migration(SchemaMigration):
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 5, 2, 16, 32, 41, 475907)'}),
+            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 5, 14, 22, 50, 26, 880171)'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -71,25 +68,15 @@ class Migration(SchemaMigration):
         },
         'productos.producto': {
             'Meta': {'object_name': 'Producto'},
-            'descripcion': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'estado': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'descripcion': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
+            'estado_producto': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
+            'estado_publicacion': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'fecha': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'imagen_1': ('django.db.models.fields.files.ImageField', [], {'default': "''", 'max_length': '100', 'blank': 'True'}),
-            'imagen_2': ('django.db.models.fields.files.ImageField', [], {'default': "''", 'max_length': '100', 'blank': 'True'}),
-            'imagen_3': ('django.db.models.fields.files.ImageField', [], {'default': "''", 'max_length': '100', 'blank': 'True'}),
-            'imagen_4': ('django.db.models.fields.files.ImageField', [], {'default': "''", 'max_length': '100', 'blank': 'True'}),
-            'imagen_5': ('django.db.models.fields.files.ImageField', [], {'default': "''", 'max_length': '100', 'blank': 'True'}),
-            'nombre': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'usuario': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['usuarios.Usuario']", 'null': 'True', 'blank': 'True'}),
-            'valor': ('django.db.models.fields.IntegerField', [], {'default': '0'})
-        },
-        'usuarios.usuario': {
-            'Meta': {'object_name': 'Usuario', '_ormbases': ['auth.User']},
-            'celular': ('django.db.models.fields.IntegerField', [], {}),
-            'direccion': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'telefono_fijo': ('django.db.models.fields.IntegerField', [], {}),
-            'user_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['auth.User']", 'unique': 'True', 'primary_key': 'True'})
+            'imagen_1': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
+            'nombre': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
+            'usuario': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True', 'blank': 'True'}),
+            'valor': ('django.db.models.fields.IntegerField', [], {'default': "''", 'null': 'True', 'blank': 'True'})
         }
     }
 

@@ -6,7 +6,10 @@ import datetime
 
 #from django.contrib.auth.models import User   # fill in custom user info then save it 
 from django.contrib.auth.forms import UserCreationForm      
-from usuarios.models import Usuario
+from accounts.models import UserProfile
+
+#from usuarios.models import Usuario
+
 
 yearNow = datetime.date.today().year 
 
@@ -22,7 +25,7 @@ class MyRegistrationForm(UserCreationForm):
     celular =  forms.IntegerField(required = True)
 
     class Meta:
-        model = Usuario
+        model = UserProfile
         fields = ('username', 'email', 'password1', 'password2')        
 
     def save(self,commit = True):   
