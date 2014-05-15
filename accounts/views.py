@@ -30,7 +30,7 @@ from productos.models import Producto
 
 @login_required(login_url='/usuarios/login/')
 def listar_mis_productos(request):
-	mis_productos = Producto.objects.all().filter(usuario=request.user.usuario.id).order_by('-fecha')[:5]
+	mis_productos = Producto.objects.all().filter(usuario=request.user.id).order_by('-fecha')[:5]
 	context = {'mis_productos': mis_productos}
 	return render(request, 'productos/index.html', context)
 
@@ -47,7 +47,7 @@ def agregar(request):
         form = MyRegistrationForm(request.POST)     # create form object
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/usuarios/')
+            return HttpResponseRedirect('/usuarios/nuevo/')
     args = {}
     args.update(csrf(request))
     args['form'] = MyRegistrationForm()
