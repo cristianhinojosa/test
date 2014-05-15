@@ -1,4 +1,4 @@
-
+# -*- encoding: utf-8 -*-
 
 from datetime import date
 from django.db import models
@@ -15,20 +15,40 @@ from django.core.exceptions import ValidationError
 
 
 
-ESTADO_PRODUCTO = (
+ESTADOS_PRODUCTO = (
      ('Nuevo', _('Nuevo')),
      ('Usado', _('Usado')),
  )
 
 
-ESTADO_PUBLICACION = (
+ESTADOS_PUBLICACION = (
      ('revisando', _('Revisando')),
      ('visible', _('Visible')),
      ('oculto', _('Oculto')),
-     
+     ('vendido', _('Vendido')),
+     ('Comprado', _('Comprar')),
  )
 
-CATEGORIA = ()
+
+
+REGION_CHOICES = (
+                ('RM', 'Región Metropolitana de Santiago'), 
+                ('I', 'Región de Tarapacá'),
+                ('II', 'Región de Antofagasta'),
+                ('III', 'Región de Atacama'), 
+                ('IV', 'Región de Coquimbo'),
+                ('V', 'Región de Valparaíso'),
+                ('VI', "Región del Libertador Bernardo O'Higgins"),
+                ('VII', 'Región del Maule'),
+                ('VIII', 'Región del Bío Bío'),
+                ('IX', 'Región de la Araucanía'),
+                ('X', 'Región de los Lagos'),
+                ('XI', 'Región de Aysén del General Carlos Ibáñez del Campo'), 
+                ('XII', 'Región de Magallanes y la Antártica Chilena'),
+                ('XIV', 'Región de Los Ríos'), ('XV', 'Región de Arica-Parinacota')
+                         )
+
+CATEGORIAS = ()
 
 
 def main_text_image_name(instance, filename):
@@ -51,8 +71,9 @@ class Producto(models.Model):
     nombre =  models.CharField(max_length=200, null=True, blank=True)
     descripcion = models.CharField(max_length=200, null=True, blank=True)
     valor = models.IntegerField(default=0,  null=True, blank=True)
-    estado_producto = models.CharField(max_length=200,choices=ESTADO_PRODUCTO, null=True, blank=True)
-    estado_publicacion = models.CharField(max_length=200,choices=ESTADO_PUBLICACION,  null=True, blank=True)
+    estado_producto = models.CharField(max_length=200,choices=ESTADOS_PRODUCTO, null=True, blank=True)
+    estado_publicacion = models.CharField(max_length=200,choices=ESTADOS_PUBLICACION,  null=True, blank=True)
+    region = models.CharField(max_length=200,choices=REGION_CHOICES,  null=True, blank=True)
     usuario = ForeignKey(User,  null=True, blank=True) 
     fecha = models.DateTimeField(_("Date"), auto_now_add=True, null=False)
        
