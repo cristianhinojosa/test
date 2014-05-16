@@ -4,6 +4,8 @@ from views import index
 import settings
 #from django.conf.urls import url
 from django.views.generic import TemplateView
+#from distutils.command.register import register
+#from django.core.urlresolvers.reverse
 
 # Uncomment the next two lines to enable the admin:
 #from django.contrib import admin
@@ -20,11 +22,11 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     
     
-     url(r'^$', index, name='home_page'),
+     url(r'^/$', index, name='index'),
      url(r'^usuarios/', include('accounts.urls') ),
      url(r'^productos/', include('productos.urls', namespace='productos')),
      url(r'^admin/', include(admin.site.urls)),
-     url(r'^cuentas/', include('registration.urls', namespace='login' )),
+     (r'^accounts/', include('registration.backends.default.urls')),
      #url(r'^pages/', include('django.contrib.flatpages.urls')),
      url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT}),
      #url(r'^media/static/bootstap/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT}),
