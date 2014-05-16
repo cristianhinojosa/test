@@ -22,12 +22,14 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     
     
-     url(r'^/$', index, name='index'),
+     url(r'^$', index, name='index'),
      url(r'^usuarios/', include('accounts.urls') ),
      url(r'^productos/', include('productos.urls', namespace='productos')),
      url(r'^admin/', include(admin.site.urls)),
-     (r'^accounts/', include('registration.backends.default.urls')),
-     #url(r'^pages/', include('django.contrib.flatpages.urls')),
+     url(r'^accounts/', include('registration.backends.default.urls')),
+    
      url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT}),
+     
+     #url(r'^pages/', include('django.contrib.flatpages.urls')),
      #url(r'^media/static/bootstap/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT}),
 )

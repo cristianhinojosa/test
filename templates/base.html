@@ -4,9 +4,9 @@
 {% load url from future %}
 {% load compressed %}
 {% load i18n cache %}
-{% url home_page as home_url %}
-{% url productos:productos_index as productos_url %}
-{% url productos:productos_index as productos_url %}
+{% url 'home_page' as home_url %}
+{% url 'productos:productos_index' as productos_url %}
+{% url 'productos:productos_index' as productos_url %}
 
 
 <title>{% block title %}{% trans 'Compra y vendes lo que quieras' %}{% endblock %}</title>
