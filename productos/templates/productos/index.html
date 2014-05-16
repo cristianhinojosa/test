@@ -21,38 +21,65 @@
 		</form>
 
 
-{% for data in mydata.object_list %}
 
-   <td>{{ data.nombre }}</td>                 
 
-</tr>
+{% for producto in productos %}
+    {# Each "producto" is a producto model object. #}
+    
+    <a href="producto/{{producto.id}}">{{ producto.nombre|upper }}<br /></a>
+    
+    
 {% endfor %}
+
+<ul class="pagination">
+    <li>
+        {% if productos.has_previous %}
+            <a href="?page={{ productos.previous_page_number }}&buscar={{ buscar }}&region={{ region }}">&laquo;</a>
+        {% endif %}
+    </li>
     
-<span>
-{% if mydata.has_previous %}
-    <a href="?page={{ insurance_plan.previous_page_number }}">previous</a>
-{% endif %}
+    <!--
+    <li>
+        <span class="current">
+            Page {{ productos.number }} of {{ productos.paginator.num_pages }}.
+        </span>
+    </li>
     
-{% for num in insurance_plan.paginator.page_range %}
-    {% ifequal num insurance_plan.number %}
-        <span class="current page">{{ num }}</span>
-    {% else %}
-        <a href="?page={{ num }}"> {{ num }}</a>
-    {% endifequal %} 
+   
+    -->
+   
+ {% for i in productos.paginator.page_range %}
+  {% ifequal i productos.number %}
+    <li class="active"><a href="?page={{ i }}&buscar={{ buscar }}&region={{ region }}">{{ i }} </a></li>
+  {% else %}
+    <li class=""><a href="?page={{ i }}&buscar={{ buscar }}&region={{ region }}">{{ i }} </a></li>
+  {% endifequal %} 
 {% endfor %}
+
+
     
-{% if insurance_plan.has_next %}
-    <a href="?page={{ insurance_plan.next_page_number }}"> Next </a>
-{% endif %}
-</span>
+	
+    
+     <li>
+        {% if productos.has_next %}
+            <a href="?page={{ productos.next_page_number }}&buscar={{ buscar }}&region={{ region }}">&raquo;</a>
+        {% endif %}
+       </li>
+</ul>
 
 
+<!--
+<ul class="pagination">
+  <li><a href="#">&laquo;</a></li>
+  <li><a href="#">1</a></li>
+  <li><a href="#">2</a></li>
+  <li><a href="#">3</a></li>
+  <li><a href="#">4</a></li>
+  <li><a href="#">5</a></li>
+  <li><a href="#">&raquo;</a></li>
+</ul>
 
-
-
-
-
-
+-->
 
 
 

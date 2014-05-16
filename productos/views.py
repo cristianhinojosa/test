@@ -15,56 +15,51 @@ from django.template.context import RequestContext
 from productos.forms import OtherProductoForm, SearchProducts
 from settings import HOME, MEDIA_URL
 from django.views.decorators.csrf import csrf_exempt
-from django.core.paginator import Paginator, EmptyPage, InvalidPage
+from django.core.paginator import Paginator, EmptyPage, InvalidPage,\
+    PageNotAnInteger
 
 
-#@csrf_exempt
-def index(req):
-    if req.GET:
-        buscar = req.GET['buscar']
-        regiones = req.GET['regiones']
-        form = SearchProducts() 
-        
-        #all_productos = Producto.objects.filter(nombre=buscar).filter(region=regiones)
-        all_productos = Producto.objects.all()
-        
+        #contact_list = Producto.objects.all()
         #all_productos = Paginator(all_productos, 1)
         #return HttpResponse('No se encontraron Productos')
         #return render_to_response('productos/index.html', {'results': results})
-        
-         
-        paginator = Paginator(all_productos, 2)
-    
-        try:
-            page = int(req.GET.get('page', '1'))
-        except ValueError:
-            page = 1
-    
-        try:
-            fp = paginator.page(page)
-        except (EmptyPage, InvalidPage):
-            fp = paginator.page(paginator.num_pages)
-        
-        return render_to_response('productos/index.html', {
-             #                       'all_productos': all_productos,
-                                    'mydata': fp,
-                                     'form': form,
-                                    
-                                    }, context_instance=RequestContext(req))
 
+def index(request):
+    if request.GET:
+        buscar = request.GET['buscar']
+        region = request.GET['region']
+        page = request.GET.get('page')
+        form = SearchProducts() 
+       
+        listado_productos = Producto.objects.filter(nombre=buscar).filter(region=region)         
+        paginator = Paginator(listado_productos, 1)
+  
+        try:
+            productos = paginator.page(page)
+        except PageNotAnInteger:
+                # If page is not an integer, deliver first page.
+            productos = paginator.page(1)
+        except EmptyPage:
+                # If page is out of range (e.g. 9999), deliver last page of results.
+            productos = paginator.page(paginator.num_pages)
+
+
+        return render_to_response('productos/index.html', {
+                                     'productos': productos,
+                                     'form': form,
+                                     'buscar': buscar,
+                                     'region': region,
+                                    }, context_instance=RequestContext(request))
     else:
         
         form = SearchProducts() # An unbound form
-        all_productos = Producto.objects.all().order_by('-fecha')
+        listado_productos = Producto.objects.all().order_by('-fecha')
 
-    return render(req, 'productos/index.html', {
+    return render(request, 'productos/index.html', {
         'form': form,
-        'all_productos': all_productos,
+        'listado_productos': listado_productos,
     })
-        
-        
-        
-        
+          
         #return HttpResponse('Please submit a search term.')
         #latest_question_list = Producto.objects.all().order_by('-fecha')
         #context = {'latest_question_list': latest_question_list}

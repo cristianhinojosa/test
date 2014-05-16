@@ -8,7 +8,7 @@ urlpatterns = patterns('',
    
     url(r'^$', views.index, name='productos_index'),
    
-    url(r'^(?P<producto_id>\d+)/$', views.detalle, name='detalle'),
+    url(r'^producto/(?P<producto_id>\d+)/$', views.detalle, name='detalle'),
    
     
     #url(r'^busqueda/$', views.busqueda),

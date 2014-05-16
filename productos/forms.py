@@ -42,7 +42,7 @@ class OtherProductoForm(BetterModelForm):
 
 class SearchProducts(forms.Form):
     buscar = forms.CharField(widget=forms.TextInput(attrs={'class' : 'buscar'}))
-    regiones  = forms.ChoiceField(label="Regiones", choices=(REGION_CHOICES),
+    region  = forms.ChoiceField(label="Regiones", choices=(REGION_CHOICES),
                                        widget=forms.Select(attrs={'class':'selector'}))
     
     
