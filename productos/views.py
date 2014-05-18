@@ -15,8 +15,9 @@ from django.template.context import RequestContext
 from productos.forms import OtherProductoForm, SearchProducts
 from settings import HOME, MEDIA_URL
 from django.views.decorators.csrf import csrf_exempt
-from django.core.paginator import Paginator, EmptyPage, InvalidPage,\
-    PageNotAnInteger
+#from django.core.paginator import Paginator, EmptyPage, InvalidPage,\
+#    PageNotAnInteger
+from .paginator import import Paginator
 
 
         #contact_list = Producto.objects.all()
