@@ -14,7 +14,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.template.context import RequestContext
 from productos.forms import OtherProductoForm, SearchProducts
 from settings import HOME, MEDIA_URL
-from django.views.decorators.csrf import csrf_exempt
+#from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator, EmptyPage, InvalidPage,\
     PageNotAnInteger
 from django.core.context_processors import request
@@ -87,7 +87,7 @@ def listar(request):
                 # If page is out of range (e.g. 9999), deliver last page of results.
             productos = paginator.page(paginator.num_pages)
         
-        print listado_productos,
+        #print listado_productos,
         return render_to_response('productos/index.html', {
                                                         'listado_productos': listado_productos, 
                                                         'productos': productos,
@@ -114,7 +114,7 @@ def AgregarProducto(request):
         form = ProductoForm(request.POST, request.FILES) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
             producto = form.save(commit=False)
-            producto.usuario = request.user.usuario
+            producto.usuario = request.user
             producto.save()
             
         

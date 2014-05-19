@@ -30,7 +30,7 @@
     
     <!--
     /productos/producto/{{ producto.id }}
-    -->
+   -->
 {% endfor %}
 
 <ul class="pagination">
@@ -67,6 +67,12 @@
 	    <p>No existen productos</p>
 	{% endif %}
 
+
+<!--
+ {% load pagination_tags %}
+ {% autopaginate productos 10 %}
+ {% paginate %}
+-->
 
 
 {% endblock %}

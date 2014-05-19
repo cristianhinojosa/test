@@ -54,12 +54,18 @@ ADMINS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
+    #'django.core.context_processors.auth',
     'django.core.context_processors.debug',
     'django.core.context_processors.media',
     'django.core.context_processors.request',
     'django.core.context_processors.i18n',
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
+    
+   
+
+    
+  
     
   #  'library.context_processors.project_urls',
   #  'library.context_processors.alternate_sites',
@@ -179,7 +185,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    
+    'pagination.middleware.PaginationMiddleware',
     
     'django.middleware.locale.LocaleMiddleware',
     #'extended_flatpages.middleware.FlatpageFallbackMiddleware',
@@ -239,7 +245,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 
-  #  'pagination',
+   'pagination',
     'bs4',
     'captcha',
     'compress',
