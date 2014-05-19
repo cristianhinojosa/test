@@ -15,20 +15,22 @@
 		
 
 		
-		<form action="" method="get">
+		<form action="{% url productos:buscar_productos %}" method="get">
 		{{ form.as_p }}
 		<input type="submit" value="Submit" />
 		</form>
 
 
-
+{% if productos %}
 
 {% for producto in productos %}
     {# Each "producto" is a producto model object. #}
     
-    <a href="producto/{{producto.id}}">{{ producto.nombre|upper }}<br /></a>
+    <a href="{% url productos:detalle producto.id  %}">{{ producto.nombre|upper }}<br /></a>
     
-    
+    <!--
+    /productos/producto/{{ producto.id }}
+    -->
 {% endfor %}
 
 <ul class="pagination">
@@ -38,15 +40,6 @@
         {% endif %}
     </li>
     
-    <!--
-    <li>
-        <span class="current">
-            Page {{ productos.number }} of {{ productos.paginator.num_pages }}.
-        </span>
-    </li>
-    
-   
-    -->
    
  {% for i in productos.paginator.page_range %}
   {% ifequal i productos.number %}
@@ -68,20 +61,11 @@
 </ul>
 
 
-<!--
-<ul class="pagination">
-  <li><a href="#">&laquo;</a></li>
-  <li><a href="#">1</a></li>
-  <li><a href="#">2</a></li>
-  <li><a href="#">3</a></li>
-  <li><a href="#">4</a></li>
-  <li><a href="#">5</a></li>
-  <li><a href="#">&raquo;</a></li>
-</ul>
-
--->
 
 
+{% else %}
+	    <p>No existen productos</p>
+	{% endif %}
 
 
 

@@ -15,9 +15,11 @@ from django.template.context import RequestContext
 from productos.forms import OtherProductoForm, SearchProducts
 from settings import HOME, MEDIA_URL
 from django.views.decorators.csrf import csrf_exempt
-#from django.core.paginator import Paginator, EmptyPage, InvalidPage,\
-#    PageNotAnInteger
-from .paginator import import Paginator
+from django.core.paginator import Paginator, EmptyPage, InvalidPage,\
+    PageNotAnInteger
+from django.core.context_processors import request
+from django.core.exceptions import ObjectDoesNotExist
+
 
 
         #contact_list = Producto.objects.all()
@@ -25,14 +27,31 @@ from .paginator import import Paginator
         #return HttpResponse('No se encontraron Productos')
         #return render_to_response('productos/index.html', {'results': results})
 
-def index(request):
-    if request.GET:
-        buscar = request.GET['buscar']
-        region = request.GET['region']
+#cantidad = 15
+
+
+#class newPagination(request., object, cantidad):
+    
+
+
+def buscar(request):
+    if request.GET.get('buscar') and  request.GET.get('region'):
         page = request.GET.get('page')
+        #buscar = request.GET['buscar']
+        try:
+            buscar = request.GET['buscar']
+            region = request.GET['region']
+        except ObjectDoesNotExist:
+            buscar = ''
+            region = 'RM'
+            
+        #region = request.GET['region']
+       
         form = SearchProducts() 
        
-        listado_productos = Producto.objects.filter(nombre=buscar).filter(region=region)         
+        listado_productos = Producto.objects.filter(nombre=buscar).filter(region=region)
+        #newPagination(listado_productos, 25)
+            
         paginator = Paginator(listado_productos, 1)
   
         try:
@@ -43,7 +62,13 @@ def index(request):
         except EmptyPage:
                 # If page is out of range (e.g. 9999), deliver last page of results.
             productos = paginator.page(paginator.num_pages)
-
+            
+        #return paginator, cantidad
+        
+       
+        #penultima = paginator.page(paginator.num_pages - 1)
+        #rango = paginator.page_range
+        #print penultima, rango
 
         return render_to_response('productos/index.html', {
                                      'productos': productos,
@@ -51,15 +76,50 @@ def index(request):
                                      'buscar': buscar,
                                      'region': region,
                                     }, context_instance=RequestContext(request))
+    
     else:
         
         form = SearchProducts() # An unbound form
-        listado_productos = Producto.objects.all().order_by('-fecha')
+        #listado_productos = Producto.objects.all().order_by('-fecha')
 
     return render(request, 'productos/index.html', {
         'form': form,
-        'listado_productos': listado_productos,
+       # 'listado_productos': listado_productos,
     })
+        
+    
+def listar(request):
+
+        
+        page = request.GET.get('page')
+    
+        form = SearchProducts() # An unbound form
+        listado_productos = Producto.objects.all()
+        paginator = Paginator(listado_productos, 1)
+  
+        try:
+            productos = paginator.page(page)
+        except PageNotAnInteger:
+                # If page is not an integer, deliver first page.
+            productos = paginator.page(1)
+        except EmptyPage:
+                # If page is out of range (e.g. 9999), deliver last page of results.
+            productos = paginator.page(paginator.num_pages)
+        
+        print listado_productos,
+        return render_to_response('productos/index.html', {
+                                                        'listado_productos': listado_productos, 
+                                                        'productos': productos,
+                                                        'form': form,
+                                                        #'buscar': buscar,
+                                                        #'region': region,
+                                                       
+    }, context_instance=RequestContext(request))
+        
+    #return render(request, 'productos/index.html', {
+    #                                                    'form': form,
+    #                                                    'listado_productos': listado_productos,
+    #})     
           
         #return HttpResponse('Please submit a search term.')
         #latest_question_list = Producto.objects.all().order_by('-fecha')
