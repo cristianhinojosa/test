@@ -21,7 +21,7 @@ from django.core.context_processors import request
 from django.core.exceptions import ObjectDoesNotExist
 
     
-#test
+#test2_
 
 def buscar(request):
     if request.GET.get('buscar') and  request.GET.get('region'):
