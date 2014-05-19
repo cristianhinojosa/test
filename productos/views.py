@@ -20,32 +20,18 @@ from django.core.paginator import Paginator, EmptyPage, InvalidPage,\
 from django.core.context_processors import request
 from django.core.exceptions import ObjectDoesNotExist
 
-
-
-        #contact_list = Producto.objects.all()
-        #all_productos = Paginator(all_productos, 1)
-        #return HttpResponse('No se encontraron Productos')
-        #return render_to_response('productos/index.html', {'results': results})
-
-#cantidad = 15
-
-
-#class newPagination(request., object, cantidad):
     
 
 
 def buscar(request):
     if request.GET.get('buscar') and  request.GET.get('region'):
         page = request.GET.get('page')
-        #buscar = request.GET['buscar']
         try:
             buscar = request.GET['buscar']
             region = request.GET['region']
         except ObjectDoesNotExist:
             buscar = ''
-            region = 'RM'
-            
-        #region = request.GET['region']
+            region = ''
        
         form = SearchProducts() 
        
@@ -63,12 +49,7 @@ def buscar(request):
                 # If page is out of range (e.g. 9999), deliver last page of results.
             productos = paginator.page(paginator.num_pages)
             
-        #return paginator, cantidad
-        
-       
-        #penultima = paginator.page(paginator.num_pages - 1)
-        #rango = paginator.page_range
-        #print penultima, rango
+
 
         return render_to_response('productos/index.html', {
                                      'productos': productos,
@@ -116,27 +97,6 @@ def listar(request):
                                                        
     }, context_instance=RequestContext(request))
         
-    #return render(request, 'productos/index.html', {
-    #                                                    'form': form,
-    #                                                    'listado_productos': listado_productos,
-    #})     
-          
-        #return HttpResponse('Please submit a search term.')
-        #latest_question_list = Producto.objects.all().order_by('-fecha')
-        #context = {'latest_question_list': latest_question_list}
-    #return render(req, 'productos/index.html', context)
-    
-    
-    #return render_to_response('productos/search.html', {})
-
-
-
-#def index(request):
-    #latest_question_list = Producto.objects.all().order_by('-fecha')[:5]
-    #context = {'latest_question_list': latest_question_list}
-    #return render(request, 'productos/index.html', context)
-
-
 
 
 def detalle(request, producto_id):
