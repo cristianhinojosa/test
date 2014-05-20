@@ -60,6 +60,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.core.context_processors.i18n',
     'django.core.context_processors.tz',
+    'django.core.context_processors.static',
     'django.contrib.messages.context_processors.messages',
     
    
@@ -136,9 +137,9 @@ USE_TZ = False
 # Example: "http://media.lawrence.com/static/"
 
 MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'media/')
-STATIC_ROOT = os.path.join(os.path.dirname(__file__), 'media/static/')
+STATIC_ROOT = os.path.join(os.path.dirname(__file__), 'static/')
 MEDIA_URL = '/media/'
-STATIC_URL = '/media/static/'
+STATIC_URL = '/static/'
 ADMIN_URL = '/admin/'
 
 JPEG_ROOT = '/usr/local/include'
@@ -153,13 +154,22 @@ HOME = 'http://127.0.0.1:8000/'
 #MEDIA_ROOT = os.path.join(BUILDOUT_DIR,  'media')
 #MEDIA_URL = '/media/images/'
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
 
 # Additional locations of static files
-STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+#STATICFILES_DIRS = (
+     #"/var/www/django/test/static/",
+     #  os.path.join( "static"),
+#    "/var/www/django/test/static/",
+      
+      # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-)
+#)
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -239,6 +249,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
      'django.contrib.admin',
      'registration',

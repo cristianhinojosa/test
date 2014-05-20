@@ -4,12 +4,15 @@ from views import index
 import settings
 #from django.conf.urls import url
 from django.views.generic import TemplateView
+from django.conf.urls.static import static
 #from distutils.command.register import register
 #from django.core.urlresolvers.reverse
 
 # Uncomment the next two lines to enable the admin:
 #from django.contrib import admin
 admin.autodiscover()
+
+
 
 urlpatterns = patterns('',
     # Examples:
@@ -27,9 +30,9 @@ urlpatterns = patterns('',
      url(r'^productos/', include('productos.urls', namespace='productos')),
      url(r'^admin/', include(admin.site.urls)),
      url(r'^accounts/', include('registration.backends.default.urls')),
-    
+     url(r'^i18n/', include('django.conf.urls.i18n')),
      url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT}),
-     
+     #url(r'^static/(?P<path>.*)$', 'serve'),
      #url(r'^pages/', include('django.contrib.flatpages.urls')),
      #url(r'^media/static/bootstap/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT}),
-)
+)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

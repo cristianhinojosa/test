@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 {% load url from future %}
+
 {% load compressed %}
 {% load i18n cache %}
 {% url 'home_page' as home_url %}
@@ -24,6 +25,7 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="/media/global/bootstrap/css/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="/media/global/bootstrap/css/bootstrap-test.css"/> 
+<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}pagination/css/style.css">
 <!--
 <link rel="stylesheet" type="text/css" href="/media/global/css/style.css"/> 
 -->
@@ -34,16 +36,19 @@
 <script type="text/javascript" src="/media/global/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/media/global/bootstrap/js/bootstramp-pag.min.js"></script>
 
-{% include page_template %}
+
+
 
 {% block js %}
     {{ block.super }}
+    <!--
     <script src="http://code.jquery.com/jquery-latest.js"></script>
+    -->
     <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
     <script>
         $.endlessPaginate({
-            paginateOnScroll: true,
-            paginateOnScrollMargin: 20
+            //paginateOnScroll: true,
+            //paginateOnScrollMargin: 20
         });
     </script>
 {% endblock %}

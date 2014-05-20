@@ -24,9 +24,27 @@ import views
     
 #test->2.2.2.2
 
+#from endless_pagination.decorators import 
+from endless_pagination.decorators import page_template
+
+@page_template('productos/index.html')  # just add this decorator
+def buscar(request, template='productos/index.html', extra_context=None):
+    if request.GET.get('buscar') and  request.GET.get('region'): 
+        buscar = request.GET['buscar']
+        region = request.GET['region']
+        form = SearchProducts()  
+        context = {
+                   'entries': Producto.objects.all(),
+                   'form': form,
+                   }
+    if extra_context is not None:
+        context.update(extra_context)
+    return render_to_response(
+        template, context, context_instance=RequestContext(request))
 
 
-def buscar(request):
+
+def buscar2(request):
     if request.GET.get('buscar') and  request.GET.get('region'):
         page = request.GET.get('page')
         #try:
