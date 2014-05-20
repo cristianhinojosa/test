@@ -54,12 +54,19 @@
 
 {% load endless %}
 
-{% paginate entries %}
+{% paginate 1 entries %}
 {% for entry in entries %}
-    {# your code to show the entry #}
+   
+   <div clas="test">{{ entry.id }} - {{ entry.nombre }} </div>
+   
+   
 {% endfor %}
 {% get_pages %}
 {% if pages.paginated %}
+
+
+
+
     <ul class="pagination pagination-centered">
     	
     		<li>{{ pages }}</li>

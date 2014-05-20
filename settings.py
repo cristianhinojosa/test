@@ -137,7 +137,7 @@ USE_TZ = False
 # Example: "http://media.lawrence.com/static/"
 
 MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'media/')
-STATIC_ROOT = os.path.join(os.path.dirname(__file__), 'static/')
+STATIC_ROOT = os.path.join(os.path.dirname(__file__), 'media/static/')
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 ADMIN_URL = '/admin/'
@@ -257,7 +257,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'endless_pagination',
 
-   'pagination',
+   #'pagination',
     'bs4',
     'captcha',
     'compress',

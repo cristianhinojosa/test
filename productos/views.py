@@ -34,13 +34,30 @@ def buscar(request, template='productos/index.html', extra_context=None):
         region = request.GET['region']
         form = SearchProducts()  
         context = {
-                   'entries': Producto.objects.all(),
+                   #'entries': Producto.objects.all(),
+                  
+                   'entries': Producto.objects.filter(nombre=buscar).filter(region=region), 
                    'form': form,
                    }
+        
+    else:
+        
+        form = SearchProducts() # An unbound form
+        #listado_productos = Producto.objects.all().order_by('-fecha')
+
+    #return render(request, 'productos/index.html', {
+    #    'form': form,
+    # 'listado_productos': listado_productos,
+    #})
+        return HttpResponseRedirect('/productos/listar/')  
+      
     if extra_context is not None:
         context.update(extra_context)
     return render_to_response(
         template, context, context_instance=RequestContext(request))
+    
+      
+ 
 
 
 
@@ -50,10 +67,6 @@ def buscar2(request):
         #try:
         buscar = request.GET['buscar']
         region = request.GET['region']
-        #except ObjectDoesNotExist:
-        #    buscar = ''
-        #    region = ''
-       
         form = SearchProducts() 
        
         objects = Producto.objects.filter(nombre=buscar).filter(region=region)
@@ -91,34 +104,50 @@ def buscar2(request):
         return HttpResponseRedirect('/productos/listar/')
         
     
-def listar(request):
-
+#def listar(request):
+@page_template('productos/index.html')  # just add this decorator
+def listar(request, template='productos/index.html', extra_context=None):
         
-        page = request.GET.get('page')
+        #page = request.GET.get('page')
     
-        form = SearchProducts() # An unbound form
-        listado_productos = Producto.objects.all()
-        paginator = Paginator(listado_productos, 1)
+        #form = SearchProducts() # An unbound form
+        #listado_productos = Producto.objects.all()
+        #paginator = Paginator(listado_productos, 1)
+        
+        form = SearchProducts()  
+        context = {
+                   #'entries': Producto.objects.all(),
+                  
+                   'entries': Producto.objects.all(), 
+                   'form': form,
+                   }
+        if extra_context is not None:
+            context.update(extra_context)
+        return render_to_response(
+                                  template, context, context_instance=RequestContext(request))
+    
+      
+        
   
-        try:
-            productos = paginator.page(page)
-        except PageNotAnInteger:
-                # If page is not an integer, deliver first page.
-            productos = paginator.page(1)
-        except EmptyPage:
-                # If page is out of range (e.g. 9999), deliver last page of results.
-            productos = paginator.page(paginator.num_pages)
-        
-        #print listado_productos,
-        return render_to_response('productos/index.html', {
-                                                        'listado_productos': listado_productos, 
-                                                        'productos': productos,
-                                                        'form': form,
-                                                        #'buscar': buscar,
-                                                        #'region': region,
-                                                       
-    }, context_instance=RequestContext(request))
-        
+#         try:
+#             productos = paginator.page(page)
+#         except PageNotAnInteger:
+#                 # If page is not an integer, deliver first page.
+#             productos = paginator.page(1)
+#         except EmptyPage:
+#                 # If page is out of range (e.g. 9999), deliver last page of results.
+#             productos = paginator.page(paginator.num_pages)
+#         
+#        #print listado_productos,
+#         return render_to_response('productos/index.html', {
+#                                                         'listado_productos': listado_productos, 
+#                                                         'productos': productos,
+#                                                         'form': form,
+#                                                         #'buscar': buscar,
+#                                                         #'region': region,
+#                                                        
+#     }, context_instance=RequestContext(request))
+#         
 
 
 def detalle(request, producto_id):
