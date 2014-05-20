@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 
+
     {% block title %}Buscar{% endblock %}
 
 
 	
 
 {% block content %}
-	
-	
-	
+
+
+
 
 		Bienvenido {{ user.username }}
 		
@@ -21,6 +22,95 @@
 		</form>
 
 
+ 	<div id="content"></div>
+ 	<div id="page-selection"></div>
+
+
+
+
+<!--
+<script>
+    $('#page-selection').bootpag({
+    total: {{ listado_productos|length }},
+    page: 1,
+    maxVisible: 10
+    }).on('page', function(event, num){
+    $("#content").html("productos/buscar/page/" + num); // or some ajax content loading...
+    
+    {% for producto in listado_productos %}
+    
+    	var nombre = {{ producto.nombre }} 
+    
+    {% endfor %}
+
+    });
+
+
+</script>
+
+
+-->
+
+<script type="text/javascript">
+function ajax_get_update()
+    {
+       $.get(url, function(results){
+          //get the parts of the result you want to update. Just select the needed parts of the response
+          var table = $("table", results);
+          var span = $("span.step-links", results);
+
+          //update the ajax_table_result with the return value
+          $('#ajax_table_result').html(table);
+          $('.step-links').html(span);
+        }, "html");
+    }
+
+//bind the corresponding links in your document to the ajax get function
+$( document ).ready( function() {
+    $( '.step-links #prev' ).click( function(e) {
+        e.preventDefault();
+        url = ($( '.step-links #prev' )[0].href);
+        ajax_get_update();
+    });
+    $( '.step-links #next' ).click( function(e) {
+        e.preventDefault();
+        url = ($( '.step-links #next' )[0].href);
+        ajax_get_update();
+
+    });
+});
+
+//since the links are reloaded we have to bind the links again
+//to the actions
+$( document ).ajaxStop( function() {
+    $( '.step-links #prev' ).click( function(e) {
+        e.preventDefault();
+        url = ($( '.step-links #prev' )[0].href);
+        ajax_get_update();
+    });
+    $( '.step-links #next' ).click( function(e) {
+        e.preventDefault();
+        url = ($( '.step-links #next' )[0].href);
+        ajax_get_update();
+    });
+});
+</script>
+
+
+{% load endless %}
+
+{% paginate objects %}
+{% for object in objects %}
+     {{ object.page }}
+    {# your code to show the entry #}
+{% endfor %}
+{% show_pages %}
+
+ <!--
+    /productos/producto/{{ producto.id }}
+   -->
+<!--
+
 {% if productos %}
 
 {% for producto in productos %}
@@ -28,9 +118,7 @@
     
     <a href="{% url productos:detalle producto.id  %}">{{ producto.nombre|upper }}<br /></a>
     
-    <!--
-    /productos/producto/{{ producto.id }}
-   -->
+   
 {% endfor %}
 
 <ul class="pagination">
@@ -66,13 +154,8 @@
 {% else %}
 	    <p>No existen productos</p>
 	{% endif %}
-
-
-<!--
- {% load pagination_tags %}
- {% autopaginate productos 10 %}
- {% paginate %}
 -->
+
 
 
 {% endblock %}

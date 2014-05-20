@@ -244,6 +244,7 @@ INSTALLED_APPS = (
      'registration',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'endless_pagination',
 
    'pagination',
     'bs4',

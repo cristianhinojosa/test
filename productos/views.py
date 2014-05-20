@@ -19,40 +19,43 @@ from django.core.paginator import Paginator, EmptyPage, InvalidPage,\
     PageNotAnInteger
 from django.core.context_processors import request
 from django.core.exceptions import ObjectDoesNotExist
+import views
 
     
 #test->2.2.2.2
 
+
+
 def buscar(request):
     if request.GET.get('buscar') and  request.GET.get('region'):
         page = request.GET.get('page')
-        try:
-            buscar = request.GET['buscar']
-            region = request.GET['region']
-        except ObjectDoesNotExist:
-            buscar = ''
-            region = ''
+        #try:
+        buscar = request.GET['buscar']
+        region = request.GET['region']
+        #except ObjectDoesNotExist:
+        #    buscar = ''
+        #    region = ''
        
         form = SearchProducts() 
        
-        listado_productos = Producto.objects.filter(nombre=buscar).filter(region=region)
+        objects = Producto.objects.filter(nombre=buscar).filter(region=region)
         #newPagination(listado_productos, 25)
             
-        paginator = Paginator(listado_productos, 1)
+#        paginator = Paginator(listado_productos, 1)
   
-        try:
-            productos = paginator.page(page)
-        except PageNotAnInteger:
-                # If page is not an integer, deliver first page.
-            productos = paginator.page(1)
-        except EmptyPage:
-                # If page is out of range (e.g. 9999), deliver last page of results.
-            productos = paginator.page(paginator.num_pages)
+#         try:
+#             productos = paginator.page(page)
+#         except PageNotAnInteger:
+#                 # If page is not an integer, deliver first page.
+#             productos = paginator.page(1)
+#         except EmptyPage:
+#                 # If page is out of range (e.g. 9999), deliver last page of results.
+#             productos = paginator.page(paginator.num_pages)
             
 
 
         return render_to_response('productos/index.html', {
-                                     'productos': productos,
+                                     'objects': objects,
                                      'form': form,
                                      'buscar': buscar,
                                      'region': region,
@@ -63,10 +66,11 @@ def buscar(request):
         form = SearchProducts() # An unbound form
         #listado_productos = Producto.objects.all().order_by('-fecha')
 
-    return render(request, 'productos/index.html', {
-        'form': form,
-       # 'listado_productos': listado_productos,
-    })
+    #return render(request, 'productos/index.html', {
+    #    'form': form,
+    # 'listado_productos': listado_productos,
+    #})
+        return HttpResponseRedirect('/productos/listar/')
         
     
 def listar(request):
