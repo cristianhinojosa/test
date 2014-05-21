@@ -108,15 +108,8 @@ def buscar2(request):
 @page_template('productos/index.html')  # just add this decorator
 def listar(request, template='productos/index.html', extra_context=None):
         
-        #page = request.GET.get('page')
-        #form = SearchProducts() # An unbound form
-        #listado_productos = Producto.objects.all()
-        #paginator = Paginator(listado_productos, 1)
-        
         form = SearchProducts()  
         context = {
-                   #'entries': Producto.objects.all(),
-                  
                    'entries': Producto.objects.all(), 
                    'form': form,
                    }
