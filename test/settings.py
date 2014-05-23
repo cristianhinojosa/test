@@ -1,14 +1,6 @@
 #-*- coding: utf-8 -*-
 import os
 
-
-ENDLESS_PAGINATION_DEFAULT_CALLABLE_EXTREMES = 1
-ENDLESS_PAGINATION_DEFAULT_CALLABLE_AROUNDS = 2
-
-ENDLESS_PAGINATION_PAGE_LABEL = "pagina"
-#ENDLESS_PAGINATION_PER_PAGE = 2
-
-
 #from os.path import dirname, join, abspath, os
 #from smtplib import SMTPAuthenticationError
 #__dir__ = dirname(abspath(__file__))
@@ -89,24 +81,24 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 MANAGERS = ADMINS
 
-# DATABASES = {
-#    'default' : {
-#       'ENGINE' : 'django_mongodb_engine',
-#       'NAME' : 'my_database'
-#    }
-# }
+#DATABASES = {
+#   'default' : {
+#      'ENGINE' : 'django_mongodb_engine',
+#      'NAME' : 'my_database'
+#   }
+#}
 
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'proyecto_django_dev',                      # Or path to database file if using sqlite3.
-        'USER': 'root',                      # Not used with sqlite3.
-        'PASSWORD': 'sroot',                  # Not used with sqlite3.
-        'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
-    }
+     'default': {
+         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+         'NAME': 'proyecto_django_dev',                      # Or path to database file if using sqlite3.
+         'USER': 'root',                      # Not used with sqlite3.
+         'PASSWORD': 'sroot',                  # Not used with sqlite3.
+         'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
+         'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
+     }
 }
 
 # Local time zone for this installation. Choices can be found here:
@@ -125,8 +117,8 @@ TIME_ZONE = 'America/Santiago'
 LANGUAGE_CODE = 'es'
 
 
-SITE_ID = 1
-#SITE_ID = u'deafbeefdeadbeef00000000'
+#SITE_ID = 1
+SITE_ID = u'deafbeefdeadbeef00000000'
 
 
 # If you set this to False, Django will make some optimizations so as not

@@ -110,7 +110,7 @@ def listar(request, template='productos/index.html', extra_context=None):
         
         form = SearchProducts()  
         context = {
-                   'entries': Producto.objects.all(), 
+                   'entries': Producto.objects.all().order_by('-fecha_inicio')[:500], 
                    'form': form,
                    }
         if extra_context is not None:

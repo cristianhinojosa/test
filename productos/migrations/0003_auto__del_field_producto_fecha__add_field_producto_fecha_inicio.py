@@ -8,14 +8,21 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Adding field 'Producto.region'
-        db.add_column('productos_producto', 'region', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True), keep_default=False)
+        # Deleting field 'Producto.fecha'
+        db.delete_column('productos_producto', 'fecha')
+
+        # Adding field 'Producto.fecha_inicio'
+        db.add_column('productos_producto', 'fecha_inicio', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, default=0, blank=True), keep_default=False)
 
 
     def backwards(self, orm):
         
-        # Deleting field 'Producto.region'
-        db.delete_column('productos_producto', 'region')
+        # We cannot add back in field 'Producto.fecha'
+        raise RuntimeError(
+            "Cannot reverse this migration. 'Producto.fecha' and its values cannot be restored.")
+
+        # Deleting field 'Producto.fecha_inicio'
+        db.delete_column('productos_producto', 'fecha_inicio')
 
 
     models = {
@@ -34,7 +41,7 @@ class Migration(SchemaMigration):
         },
         'auth.user': {
             'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 5, 15, 12, 15, 10, 95279)'}),
+            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 5, 23, 16, 7, 37, 679446)'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -42,7 +49,7 @@ class Migration(SchemaMigration):
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 5, 15, 12, 15, 10, 95180)'}),
+            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 5, 23, 16, 7, 37, 679247)'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -60,7 +67,7 @@ class Migration(SchemaMigration):
             'descripcion': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'estado_producto': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'estado_publicacion': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
-            'fecha': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'fecha_inicio': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'imagen_1': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
             'nombre': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),

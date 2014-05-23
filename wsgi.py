@@ -38,6 +38,8 @@ framework.
 
 import os
 import sys
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
+
 
 # activate venv
 #activate_this = ''

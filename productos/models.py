@@ -75,7 +75,7 @@ class Producto(models.Model):
     estado_publicacion = models.CharField(max_length=200,choices=ESTADOS_PUBLICACION,  null=True, blank=True)
     region = models.CharField(max_length=200,choices=REGION_CHOICES,  null=True, blank=True)
     usuario = ForeignKey(User,  null=True, blank=True) 
-    fecha = models.DateTimeField(_("Date"), auto_now_add=True, null=False)
+    fecha_inicio = models.DateTimeField()
        
     imagen_1 = models.ImageField("1 foto", upload_to="images/productos", blank=True, validators=[validate_image])
     #imagen_2 = models.ImageField("2 foto", upload_to="images/productos", blank=True)

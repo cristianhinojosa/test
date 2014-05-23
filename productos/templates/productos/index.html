@@ -1,60 +1,32 @@
 {% extends "base.html" %}
-
-
-    {% block title %}Buscar{% endblock %}
-
-
-	
-
+{% block title %}Buscar{% endblock %}
 {% block content %}
+{% load endless %}
+{% paginate 1 entries %}
 
 
 
 
-		Bienvenido {{ user.username }}
 		
 		
-
-		
+<div class="row-fluid">		
+	
+	<div class="row-fluid">
+	
+	<div class="span4">
+			Bienvenido {{ user.username }}
 		<form action="{% url productos:buscar_productos %}" method="get">
 		{{ form.as_p }}
 		<input type="submit" value="Buscar" />
 		</form>
+	
+	
+</div>
 
 
-<br>
-
-<!--
-<script>
-    $('#page-selection').bootpag({
-    total: {{ listado_productos|length }},
-    page: 1,
-    maxVisible: 10
-    }).on('page', function(event, num){
-    $("#content").html("productos/buscar/page/" + num); // or some ajax content loading...
-    
-    {% for producto in listado_productos %}
-    
-    	var nombre = {{ producto.nombre }} 
-    
-    {% endfor %}
-
-    });
-
-
-</script>
-
-
--->
-
-
-{% load endless %}
-
-{% paginate 1 entries %}
 {% for entry in entries %}
    
-   <div class="row-fluid">
-		<div class="span12">
+		<div class="span4">
    
    
   {{ entry.id }} - {{ entry.nombre }}
@@ -62,11 +34,6 @@
   	</div>
 
 
-</div>
-   
-   <!--
-   <div class="well object"> </div>
-   -->
    
 {% endfor %}
 {% get_pages %}
@@ -74,6 +41,8 @@
 
 
 
+<div class="hidden-sm visible-md visible-lg">
+	
 
     <ul class="pagination pagination-centered">
     	
@@ -81,9 +50,47 @@
     		
     	</ul>
     	 
+</div>  
   
+  
+ <div class="visible-sm visible-xs hidden-lg hidden-md ">
+ 	Mostrando productos x pagina <br>
+ 	
+ 	<ul class="pagination pagination-centered">
+      	
+      	  <li>{{ pages.previous }} </li>
+  			<li>{{ pages.next }}</li>
+      	
+      </ul>
+ </div> 
+      
+  
+
+  
+
+
+
+{% endif %}
+
+
+{% if entries %}
+
+{% else %}
+   
+   
+   <h1>No existen productos</h1>
    
 {% endif %}
+
+	
+	</div>
+	
+
+
+</div>
+
+
+
  <!--
     /productos/producto/{{ producto.id }}
    -->
