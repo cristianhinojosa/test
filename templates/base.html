@@ -5,9 +5,10 @@
 
 {% load compressed %}
 {% load i18n cache %}
-{% url 'home_page' as home_url %}
-{% url 'productos:productos_index' as productos_url %}
-{% url 'productos:productos_index' as productos_url %}
+{% url 'index' as home_url %}
+{% url 'productos:listar_productos' as listar_p %}
+{% url 'productos:buscar_productos' as buscar_p %}
+
 
 
 <title>{% block title %}{% trans 'Compra y vendes lo que quieras' %}{% endblock %}</title>
@@ -87,56 +88,6 @@
   <body>
 
 
-  	 <!--
-        <li class="{% ifequal request.path productos_url %}active{% endifequal %}"><a href="{{ productos_url }}"> Productos</a></li>
-        -->
-  	
-  	<!--
-
- <div class="navbar navbar-inverse navbar-fixed-top">
- <div class="container">
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>    
-  </div>
-  <a class="navbar-brand" href="#">Todo-Avisos.cl</a>
-  <div class="navbar-collapse collapse">
-    <ul class="nav navbar-nav navbar-left">
-        <li class="{% ifequal request.path home_url %}active{% endifequal %}"><a href="{{ home_url }}"> Home</a></li>
-       
-     
-     
-     <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
-     
-        
-        
-        <li><a href="#about">Login</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-    	
-    	<form action="" method="get">
-	     <input type="text" name="q">
-     	<button class="forward"  type="submit"><span class="glyphicon glyphicon-search"></span> </button>
-     </form>
-    </ul>
-  </div>
-</nav>        
-       
-        -->
         
         
         
@@ -156,11 +107,13 @@
           <ul class="nav navbar-nav">
             <li class="{% ifequal request.path home_url %}active{% endifequal %}"><a href="{{ home_url }}"> Home</a></li>
             
-            <li class="dropdown">
+            <li class="dropdown {% if request.path == buscar_productos or request.path == listar_p  %}active{% endif %}">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Productos <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Buscar Productos</a></li>
-              
+                <li class="">
+                	<a href="{{ listar_p }}">Buscar Productos</a>
+                	</li>
+              {{ listar_p  }}
               </ul>
             </li>
             

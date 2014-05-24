@@ -2,93 +2,108 @@
 {% block title %}Buscar{% endblock %}
 {% block content %}
 {% load endless %}
-{% paginate 1 entries %}
+{% paginate 10 entries %}
 
 
 
 
 		
 		
-<div class="row-fluid">		
+<div class="row">		
 	
-	<div class="row-fluid">
-	
-	<div class="span4">
-			Bienvenido {{ user.username }}
+	<!--
+	<div class="col-xs-6 col-sm-3 sidebar-offcanvas">
+	-->
+	<div class="col-sm-3 col-md-2 sidebar" role="navigation">
+		
+    
+       	
+   		<!--
+		Bienvenido {{ user.username }}<br>
+		-->
 		<form action="{% url productos:buscar_productos %}" method="get">
 		{{ form.as_p }}
 		<input type="submit" value="Buscar" />
 		</form>
+	<br>
 	
+	</div>
 	
-</div>
 
+<div class="col-xs-6 col-md-4">
+	<table class="table">
+	
+			
+	
+		
 
 {% for entry in entries %}
-   
-		<div class="span4">
-   
-   
-  {{ entry.id }} - {{ entry.nombre }}
   
-  	</div>
-
-
-   
-{% endfor %}
-{% get_pages %}
-{% if pages.paginated %}
-
-
-
-<div class="hidden-sm visible-md visible-lg">
 	
+		
+  	<tr>
+  		<td>{{ entry.fecha_inicio }}</td>
+  		<td>{{ entry.precio }}</td>
+  		<td>{{ entry.imagen_1 }}</td>
+  		<td>{{ entry.nombre }}</td>
+  		
+  	</tr>	
+  	
 
-    <ul class="pagination pagination-centered">
-    	
-    		<li>{{ pages }}</li>
-    		
-    	</ul>
-    	 
-</div>  
-  
-  
- <div class="visible-sm visible-xs hidden-lg hidden-md ">
- 	Mostrando productos x pagina <br>
- 	
- 	<ul class="pagination pagination-centered">
-      	
-      	  <li>{{ pages.previous }} </li>
-  			<li>{{ pages.next }}</li>
-      	
-      </ul>
- </div> 
-      
-  
+
+   
+
+
+{% endfor %}
+
+
 
   
 
 
 
-{% endif %}
+
 
 
 {% if entries %}
 
 {% else %}
    
+   <tr><td> <h5>No existen productos en la busqueda que realizaste</h5></td></tr>
+  
    
-   <h1>No existen productos</h1>
+   	</table>
    
 {% endif %}
 
+	 	</table>
+
+
+{% get_pages %}
+{% if pages.paginated %}
+
+
+
+<div class="hidden-sm visible-md visible-lg">
+    <ul class="pagination pagination-centered" style="margin: 0px !important;">
+    		<li>{{ pages }}</li>
+    </ul>	 
+</div>  
+  
+  
+	 <div class="visible-sm visible-xs hidden-lg hidden-md ">
+	 	Mostrando productos x pagina <br>
+	 	<ul class="pagination pagination-centered" style="margin: 0px !important;">	
+	      	<li>{{ pages.previous }} </li>
+	  		<li>{{ pages.next }}</li>
+	      </ul>
+	 </div> 
+	      
+  
 	
 	</div>
 	
-
-
-</div>
-
+{% endif %}   
 
 
  <!--

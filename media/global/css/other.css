@@ -22,6 +22,6 @@
     /* custom max width */
     max-width:320px;
 }
-.span12{
+.span12, .sidebar{
 	background-color: #DCEAF4;
 }
