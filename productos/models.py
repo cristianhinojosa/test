@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 
-from datetime import date
+from datetime import date, timedelta, datetime
 from django.db import models
 from django.db.models.fields.related import ForeignKey
 #from django.db.models.fields.related import ImageField
@@ -12,6 +12,8 @@ from django.forms.models import ModelForm
 
 #from user_profile import usuario
 from django.core.exceptions import ValidationError
+from django.utils import timezone
+import datetime
 
 
 
@@ -23,7 +25,7 @@ ESTADOS_PRODUCTO = (
 
 ESTADOS_PUBLICACION = (
      ('revisando', _('Revisando')),
-     ('visible', _('Visible')),
+     ('publicado', _('Publicado')),
      ('oculto', _('Oculto')),
      ('vendido', _('Vendido')),
      ('Comprado', _('Comprado')),
@@ -74,7 +76,17 @@ def main_text_image_name(instance, filename):
 
 #class Categoria(models.Model):
 #    nombre =  models.CharField(max_length=200, null=True, blank=True)
-    
+
+#fecha_termino = timezone.now() + datetime.timedelta(days=60)
+
+#ahora2 = datatime.now()
+
+#d = datetime
+
+future_days  = timezone.now() + datetime.timedelta(days=90)
+now = timezone.now()
+#print ahora
+
 
 class Producto(models.Model):
     def validate_image(self):
@@ -89,12 +101,14 @@ class Producto(models.Model):
     descripcion = models.CharField(max_length=200, null=True, blank=True)
     valor = models.IntegerField(default=0,  null=True, blank=True)
     estado_producto = models.CharField(max_length=200,choices=ESTADOS_PRODUCTO, null=True, blank=True)
-    estado_publicacion = models.CharField(max_length=200,choices=ESTADOS_PUBLICACION,  null=True, blank=True)
+    estado_publicacion = models.CharField(max_length=200,choices=ESTADOS_PUBLICACION, null=True, blank=True)
     region = models.CharField(max_length=200,choices=REGION_CHOICES,  null=True, blank=True)
-    usuario = ForeignKey(User,  null=True, blank=True) 
-    fecha_inicio = models.DateTimeField()
+    usuario = ForeignKey(User,  null=True, blank=True, editable=False) 
+    fecha_inicio = models.DateTimeField(default=now, editable=False)
+    fecha_termino = models.DateTimeField(default=future_days, editable=False)
     categorias = models.CharField(max_length=200,choices=CATEGORIAS, null=True, blank=True)
-       
+    
+
     imagen_1 = models.ImageField("1 foto", upload_to="images/productos", blank=True, validators=[validate_image])
     #imagen_2 = models.ImageField("2 foto", upload_to="images/productos", blank=True)
     #imagen_3 = models.ImageField("3 foto", upload_to="images/productos", blank=True)

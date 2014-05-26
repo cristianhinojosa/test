@@ -26,16 +26,13 @@
 <!-- Bootstrap -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="/media/global/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-
-<link rel="stylesheet" type="text/css" href="/media/global/bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}global/bootstrap/css/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="/media/global/bootstrap/css/bootstrap-test.css"/> 
 <link rel="stylesheet" type="text/css" href="/media/pagination/css/style.css">
 <link rel="stylesheet" type="text/css" href="/media/global/css/other.css"/> 
 <!--
-
--->
-<!--
 <link rel="stylesheet" type="text/css" href="/media/global/css/style.css"/> 
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}global/bootstrap/css/bootstrap.min.css"/>
 -->
 
 
@@ -107,13 +104,13 @@
           <ul class="nav navbar-nav">
             <li class="{% ifequal request.path home_url %}active{% endifequal %}"><a href="{{ home_url }}"> Home</a></li>
             
-            <li class="dropdown {% if request.path == buscar_productos or request.path == listar_p  %}active{% endif %}">
+            <li class="dropdown {% if request.path == buscar_p or request.path == listar_p  %}active{% endif %}">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Productos <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li class="">
                 	<a href="{{ listar_p }}">Buscar Productos</a>
                 	</li>
-              {{ listar_p  }}
+             
               </ul>
             </li>
             

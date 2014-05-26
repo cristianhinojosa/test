@@ -7,6 +7,8 @@ from productos import RestrictedImageField
 from productos.models import Producto, REGION_CHOICES
 from form_utils.forms import BetterModelForm
 from django.core.exceptions import ValidationError
+from django.forms.widgets import Textarea, TextInput
+#from productos.forms import ProductoForm
 #from django.contrib.localflavor.be.be_regions import REGION_CHOICES
 
 
@@ -57,9 +59,18 @@ class SearchProducts(forms.Form):
 class ProductoForm(forms.ModelForm):
     class Meta:
         model = Producto
-        #fields = ['nombre', 'descripcion', 'valor', 'estado', 'usuario', 'imagen_1', 'imagen_2','imagen_3','imagen_4','imagen_5']
-        exclude = ('usuario', 'estado_publicacion')
-    
+        #fields = ['nombre', 'descripcion', 'valor', 'usuario', 'imagen_1', 'imagen_2','imagen_3','imagen_4','imagen_5']
+        exclude = ('usuario', 'estado_publicacion', 'fecha_inicio')
+        #self.fields['descripcion'].widget.attrs['class'] = 'autocomplete'
+        widgets = {
+                   
+                   
+            'descripcion': Textarea(attrs={'cols': 20, 'rows': 7, 'class': 'form-control' }),
+           #  'nombre': TextInput (attrs={'class': 'form-control' }),
+        } 
+        
+   
+      
         
      
 #     def clean_imagen_1(self):

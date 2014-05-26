@@ -1,29 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Buscar{% endblock %}
+{% block content %}
 {% block titulo %} <title>Nuevo Producto</title>{% endblock %}
-{% block encabezado %}
+
+<style type="text/css">
+textarea[name="descripcion"] {
+border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-bottom: -1px;
+   }	
+   
+form.form-agregar-productos{
+	margin: 0 auto;
+    max-width: 330px;
+    padding: 15px;
+}   
+</style>
+
+<script>
+$(document).ready(function(){
+	$("form").addClass( "form-agregar-productos" );
+	$(".form-agregar-productos input").addClass( "form-control" );
+	$("#id_imagen_1").removeClass( "form-control" );
+	
+});
+</script>
+
+
+
+
+
+
+
+	
+
 
 
 {% if user.is_authenticated %}
-	<h1>Publica un nuevo producto</h1>
 	
-	{% else %}
-	
-	 Debe autentificarse primero
-{% endif %}
-
-{% endblock %}
-{% block contenido %}
-	
-
-
-
-
-
-
-{% endblock %}
-{% if user.is_authenticated %}
 	<form action="" method="post"  enctype="multipart/form-data">{% csrf_token %}
-	{{ form.as_p }}
-	<input type="submit" value="Submit" />
+		<h2>Agregar un producto</h2>	
+		{{ form.as_p }}
+		<button class="btn btn-lg btn-primary btn-block">Enviar</button>
 	</form>
+{% else %}
 
-{% endif %}
+	 <h2>Debe autentificarse primero</h2>
+
+	</form>
+{% endif %}		
+	
+
+
+
+{% endblock %}

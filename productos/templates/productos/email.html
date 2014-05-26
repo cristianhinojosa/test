@@ -1,0 +1,20 @@
+{% load i18n admin_urls  %}
+
+{% get_current_language as LANGUAGE_CODE %}
+{% get_language_info for LANGUAGE_CODE as current_language  %}
+
+{% trans 'Date and time the request was sent:' %} {% now "d-m-Y" %} {% now "H:i" %}
+
+	
+	
+	{% trans 'Usuario' %}: {{ user.user }}<br/>
+	
+	Tu correo esta siendo revisado, tu publicación si 
+	
+	
+	{% trans 'Email' %}: {{ user.email }}
+	
+	Nombre del producto: {{ producto.nombre }}
+	
+	Descripción del producto publicado: {{ producto.descripcion }}
+

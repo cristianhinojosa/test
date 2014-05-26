@@ -25,3 +25,13 @@
 .span12, .sidebar{
 	background-color: #DCEAF4;
 }
+.table-responsive
+{
+    overflow-x: auto;
+}
+body {
+	 background-color: #EEEFFF;
+    #background-color: #EEEEEE;
+    padding-bottom: 40px;
+    padding-top: 40px;
+}

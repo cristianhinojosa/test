@@ -31,7 +31,7 @@ EMAIL_HOST = 'smtp.gmail.com'  # smtp host
 EMAIL_USE_TLS = True 
 EMAIL_PORT = 587                    # smtp port
 EMAIL_HOST_USER = 'cristian.hinojosa@gmail.com' # smtp host user name
-EMAIL_HOST_PASSWORD = ''  # smtp host password
+EMAIL_HOST_PASSWORD = '!pitinix1397'  # smtp host password
 EMAIL_SENDER_NAME = 'Cristian Hinojosa Site' # displayed name in the emails
 EMAIL_SENDER = 'cristian.hinojosa@gmail.com'    # mail address that sends booking confirmations
 EMAIL_FAIL_SILENTLY = False        # set to false for debugging
@@ -42,10 +42,11 @@ DEFAULT_CHARSET = 'utf-8'
 FILE_CHARSET = 'utf-8'
 
 
+LANGUAGE_CODE = 'es'
 
 LANGUAGES = (
-  ('es', u'Español'),
-  ('en', ('English')),
+  ('es', 'Español'),
+  #('en', ('English')),
 )
 
 
@@ -122,7 +123,7 @@ TIME_ZONE = 'America/Santiago'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 #LANGUAGE_CODE = 'en-us'
 
-LANGUAGE_CODE = 'es'
+
 
 
 SITE_ID = 1
@@ -138,7 +139,7 @@ USE_I18N = True
 USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
-USE_TZ = False
+USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 #MEDIA_ROOT = ''

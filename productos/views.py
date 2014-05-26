@@ -1,5 +1,5 @@
-
-from django.shortcuts import render
+# -*- encoding: utf-8 -*-
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 
 from django.views.generic import TemplateView
@@ -26,6 +26,11 @@ import views
 
 #from endless_pagination.decorators import 
 from endless_pagination.decorators import page_template
+from django.template.loader import get_template
+import user
+import settings
+from django.core.mail import send_mail
+from django.db.models.query_utils import Q
 
 @page_template('productos/index.html')  # just add this decorator
 def buscar(request, template='productos/index.html', extra_context=None):
@@ -36,7 +41,15 @@ def buscar(request, template='productos/index.html', extra_context=None):
         context = {
                    #'entries': Producto.objects.all(),
                   
-                   'entries': Producto.objects.filter(nombre=buscar).filter(region=region), 
+                   #'entries': Producto.objects.filter(nombre=buscar).filter(region=region), 
+                  'entries': Producto.objects.filter(
+                                                     
+                                                     Q(region__icontains=region)
+                                                     & Q(nombre__icontains=buscar)
+                                                     & Q(estado_publicacion__icontains="publicado")
+                                                     | Q(descripcion__icontains=buscar) 
+                                                    
+                                                     ),
                    'form': form,
                    }
         
@@ -110,7 +123,11 @@ def listar(request, template='productos/index.html', extra_context=None):
         
         form = SearchProducts()  
         context = {
-                   'entries': Producto.objects.all().order_by('-fecha_inicio')[:500], 
+                   'entries': Producto.objects.filter(Q(
+                                                        estado_publicacion__icontains="publicado")
+                                                        )
+                                                        .order_by('-fecha_inicio')[:1000],
+                   #'entries': Producto.objects.all().order_by('-fecha_inicio')[:500], 
                    'form': form,
                    }
         if extra_context is not None:
@@ -156,13 +173,41 @@ def AgregarProducto(request):
         # ContactForm was defined in the previous section
         form = ProductoForm(request.POST, request.FILES) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
+            
             producto = form.save(commit=False)
+            producto.estado_publicacion = ("revisando")
             producto.usuario = request.user
+            user = request.user
             producto.save()
+            
+            mail_context_dict = {
+                     'user': user,
+                     'producto': producto,
+                   # 'consulting_appointment': consulting_appointment
+                    #'task_suggestion_kwargs': task_suggestion_kwargs
+            }
+            
+            
+            mail_context = RequestContext(request, mail_context_dict)
+            mail_template = get_template('productos/email.html')
+            mail_message = mail_template.render(mail_context)
+            mail_subject = 'Su publicación esta siendo revisada ' + user.first_name + ' ' + user.last_name + ', Email :' + user.email
+            send_mail(mail_subject, mail_message, user.email, [user.email], settings.EMAIL_FAIL_SILENTLY)
+            
+        #test
+        #send_mail(mail_subject, mail_message, customer.email, ['cristian.hinojosa@lingua-group.org', 'logs@lingua-group.org'], settings.EMAIL_FAIL_SILENTLY)
+        
+          
+                   
+        
+            return redirect('productos:listar_productos')
+            
+         
+            
             
         
             #producto.save()
-            return HttpResponseRedirect(HOME) # Redirect after POST
+            #return HttpResponseRedirect(HOME) # Redirect after POST
     else:
         form = ProductoForm() # An unbound form
 

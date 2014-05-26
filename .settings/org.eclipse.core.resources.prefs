@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
 encoding//accounts/migrations/0001_initial.py=utf-8
-encoding//productos/migrations/0001_initial.py=utf-8
 encoding//productos/models.py=utf-8
+encoding//productos/views.py=utf-8
 encoding/settings.py=utf-8
