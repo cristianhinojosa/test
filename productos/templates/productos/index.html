@@ -2,7 +2,7 @@
 {% block title %}Buscar{% endblock %}
 {% block content %}
 {% load endless %}
-{% paginate 10 entries %}
+{% paginate 20 entries %}
 
 
 
@@ -21,7 +21,7 @@
    		<!--
 		Bienvenido {{ user.username }}<br>
 		-->
-		<form action="{% url productos:buscar_productos %}" method="get">
+		<form action="{% url 'productos:buscar_productos' %}" method="get">
 		{{ form.as_p }}
 		<input type="submit" value="Buscar" />
 		</form>
@@ -29,24 +29,56 @@
 	
 	</div>
 	
-
+<!--
 <div class="col-xs-4 col-sm-4">
+-->
+
+
+<div class="col-sm-8 table-responsive">
 	<table class="table">
 	
-			
+		<th colspan="4" style="text-align: center;">
+		{% get_pages %}
+Mostrando productos 
+{{ pages.current_start_index }}-{{ pages.current_end_index }} del total
+{{ pages.total_count }}.
+	</th>
 	
+	
+</tr>			
+
 		
+	<tr>
+		<th>Fecha</th>
+		<th>Articulo</th>
+		<th>Imagen</th>
+		<th>Precio</th>
+	</tr>
+
+	
+<tr>
+
+
+
+
+
+	
+	
 
 {% for entry in entries %}
-  
+
+
+
 	
 		
   	<tr>
-  		<td>{{ entry.fecha_inicio }}</td>
-  		<td>{{ entry.precio }}</td>
-  		<td>{{ entry.imagen_1 }}</td>
+  		<td>{{ entry.fecha_inicio|date:"m-d-Y" }}</td>
   		<td>{{ entry.nombre }}</td>
+	
+		<td>{{ entry.imagen_1 }}</td>
+  		<td>{{ entry.valor }}</td>
   		
+  		  		
   	</tr>	
   	
 
@@ -57,6 +89,8 @@
 {% endfor %}
 
 
+
+	
 
   
 
@@ -76,39 +110,19 @@
    
 {% endif %}
 
+
 	 	</table>
 
 
-{% get_pages %}
-{% if pages.paginated %}
+{%  include "productos/paginacion-productos.html" %}
+</div>
+<div class="col-sm-2" role="navigation" style="float: right;"><img src="/media/baner/banner.jpeg"></div>
 
 
+</div>
 
-<div class="hidden-sm visible-md visible-lg">
-    <ul class="pagination pagination-centered" style="margin: 0px !important;">
-    		<li>{{ pages }}</li>
-    </ul>	 
-</div>  
-  
-  
-	 <div class="visible-sm visible-xs hidden-lg hidden-md ">
-	 	Mostrando productos x pagina <br>
-	 	<ul class="pagination pagination-centered" style="margin: 0px !important;">	
-	      	<li>{{ pages.previous }} </li>
-	  		<li>{{ pages.next }}</li>
-	      </ul>
-	 </div> 
-	      
-  
-	
-	</div>
-	
-{% endif %}   
+ 
 
-
- <!--
-    /productos/producto/{{ producto.id }}
-   -->
 <!--
 
 {% if productos %}
@@ -116,7 +130,7 @@
 {% for producto in productos %}
     {# Each "producto" is a producto model object. #}
     
-    <a href="{% url productos:detalle producto.id  %}">{{ producto.nombre|upper }}<br /></a>
+    <a href="{% url 'productos:detalle producto.id'  %}">{{ producto.nombre|upper }}<br /></a>
     
    
 {% endfor %}

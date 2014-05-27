@@ -1,0 +1,26 @@
+{% if pages.paginated %}
+
+
+
+
+
+<div class="hidden-sm visible-md visible-lg">
+    <ul class="pagination pagination-centered" style="margin: 0px !important;">
+    		<li>{{ pages }}</li>
+    </ul>	 
+</div>  
+  
+  
+	 <div class="visible-sm visible-xs hidden-lg hidden-md ">
+	 	Mostrando productos x pagina <br>
+	 	<ul class="pagination pagination-centered" style="margin: 0px !important;">	
+	      	<li>{{ pages.previous }} </li>
+	  		<li>{{ pages.next }}</li>
+	      </ul>
+	 </div> 
+	      
+  {% endif %} 
+	
+	
+	
+ 

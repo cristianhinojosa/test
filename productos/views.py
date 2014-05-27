@@ -21,6 +21,9 @@ from django.core.context_processors import request
 from django.core.exceptions import ObjectDoesNotExist
 import views
 
+
+from django.db import connection
+print connection.queries
     
 #test->2.2.2.2
 
@@ -38,11 +41,15 @@ def buscar(request, template='productos/index.html', extra_context=None):
         buscar = request.GET['buscar']
         region = request.GET['region']
         form = SearchProducts()  
+        
+     
+        
+        
         context = {
                    #'entries': Producto.objects.all(),
                   
                    #'entries': Producto.objects.filter(nombre=buscar).filter(region=region), 
-                  'entries': Producto.objects.filter(
+                  'entries':  Producto.objects.filter(
                                                      
                                                      Q(region__icontains=region)
                                                      & Q(nombre__icontains=buscar)
@@ -51,7 +58,10 @@ def buscar(request, template='productos/index.html', extra_context=None):
                                                     
                                                      ),
                    'form': form,
+                   
                    }
+        
+
         
     else:
         
@@ -66,6 +76,8 @@ def buscar(request, template='productos/index.html', extra_context=None):
       
     if extra_context is not None:
         context.update(extra_context)
+        
+    #print context    
     return render_to_response(
         template, context, context_instance=RequestContext(request))
     
@@ -126,7 +138,8 @@ def listar(request, template='productos/index.html', extra_context=None):
                    'entries': Producto.objects.filter(Q(
                                                         estado_publicacion__icontains="publicado")
                                                         )
-                                                        .order_by('-fecha_inicio')[:1000],
+                                                        .order_by('-fecha_inicio'),
+                                                        #[:1000],
                    #'entries': Producto.objects.all().order_by('-fecha_inicio')[:500], 
                    'form': form,
                    }

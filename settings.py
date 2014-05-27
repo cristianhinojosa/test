@@ -2,8 +2,8 @@
 import os
 
 
-ENDLESS_PAGINATION_DEFAULT_CALLABLE_EXTREMES = 1
-ENDLESS_PAGINATION_DEFAULT_CALLABLE_AROUNDS = 2
+#ENDLESS_PAGINATION_DEFAULT_CALLABLE_EXTREMES = 1
+#ENDLESS_PAGINATION_DEFAULT_CALLABLE_AROUNDS = 2
 
 ENDLESS_PAGINATION_PAGE_LABEL = "pagina"
 #ENDLESS_PAGINATION_PER_PAGE = 2
@@ -287,7 +287,7 @@ INSTALLED_APPS = (
     'django_countries',
     'filebrowser',
     'form_utils',
-    'httpproxy',
+  #  'httpproxy',
     'south',
     'tinymce',
     'transmeta',

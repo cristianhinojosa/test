@@ -83,6 +83,11 @@ def main_text_image_name(instance, filename):
 
 #d = datetime
 
+DESTACAR = (
+       ('si', _('1')),
+       ('no', _('0')),
+            )
+
 future_days  = timezone.now() + datetime.timedelta(days=90)
 now = timezone.now()
 #print ahora
@@ -104,8 +109,10 @@ class Producto(models.Model):
     estado_publicacion = models.CharField(max_length=200,choices=ESTADOS_PUBLICACION, null=True, blank=True)
     region = models.CharField(max_length=200,choices=REGION_CHOICES,  null=True, blank=True)
     usuario = ForeignKey(User,  null=True, blank=True, editable=False) 
-    fecha_inicio = models.DateTimeField(default=now, editable=False)
-    fecha_termino = models.DateTimeField(default=future_days, editable=False)
+    fecha_inicio = models.DateField(default=now, editable=False)
+    fecha_termino = models.DateField(default=future_days, editable=False)
+    destacar = models.CharField(max_length=200,choices=DESTACAR, null=True, blank=True, editable=True)
+    
     categorias = models.CharField(max_length=200,choices=CATEGORIAS, null=True, blank=True)
     
 
