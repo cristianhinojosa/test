@@ -81,7 +81,10 @@ $(document).ready(function(){
   		<td><a href="{% url 'productos:detalle' producto.id  %}">{{ producto.fecha_inicio|date:"m-d-Y" }}</a></td>
   		<td><a href="{% url 'productos:detalle' producto.id  %}">{{ producto.nombre }}</a></td>
 	
-		<td><a href="{% url 'productos:detalle' producto.id  %}">{{ producto.imagen_1 }}</a></td>
+		<td><a href="{% url 'productos:detalle' producto.id  %}">
+			<img src="/media/{{ producto.imagen_1 }}/" width="80px" height="80px;">
+			
+			</a></td>
   		<td><a href="{% url 'productos:detalle' producto.id  %}">{{ producto.valor }}</a></td>
   		
   		  	

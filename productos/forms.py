@@ -4,7 +4,7 @@ from django import forms
 from django.forms import extras, widgets
 import datetime
 from productos import RestrictedImageField
-from productos.models import Producto, REGION_CHOICES
+from productos.models import Producto, REGION_CHOICES, Pregunta
 from form_utils.forms import BetterModelForm
 from django.core.exceptions import ValidationError
 from django.forms.widgets import Textarea, TextInput
@@ -55,12 +55,15 @@ class SearchProducts(forms.Form):
     #    self.fields['regiones'].choices = choices
     
 
+class PreguntaForm(forms.ModelForm):
+    class Meta:
+        model = Pregunta   
 
 class ProductoForm(forms.ModelForm):
     class Meta:
         model = Producto
         #fields = ['nombre', 'descripcion', 'valor', 'usuario', 'imagen_1', 'imagen_2','imagen_3','imagen_4','imagen_5']
-        exclude = ('usuario', 'estado_publicacion', 'fecha_inicio')
+        exclude = ('usuario', 'estado_publicacion', 'fecha_inicio', 'fecha_termino','destacar')
         #self.fields['descripcion'].widget.attrs['class'] = 'autocomplete'
         widgets = {
                    

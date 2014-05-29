@@ -5,14 +5,14 @@ from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
 
 from django.http import HttpResponse
-from productos.models import Producto
+from productos.models import Producto, Pregunta, Respuesta
 from django.shortcuts import get_object_or_404, render, render_to_response
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from forms import ProductoForm
 from django.core.urlresolvers import reverse_lazy
 from django.template.context import RequestContext
-from productos.forms import OtherProductoForm, SearchProducts
+from productos.forms import OtherProductoForm, SearchProducts, PreguntaForm
 from settings import HOME, MEDIA_URL
 #from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator, EmptyPage, InvalidPage,\
@@ -35,8 +35,8 @@ import settings
 from django.core.mail import send_mail
 from django.db.models.query_utils import Q
 
-@page_template('productos/index.html')  # just add this decorator
-def buscar(request, template='productos/index.html', extra_context=None):
+@page_template('productos/productos.html')  # just add this decorator
+def buscar(request, template='productos/productos.html', extra_context=None):
     if request.GET.get('buscar') and  request.GET.get('region'): 
         buscar = request.GET['buscar']
         region = request.GET['region']
@@ -68,7 +68,7 @@ def buscar(request, template='productos/index.html', extra_context=None):
         form = SearchProducts() # An unbound form
         #listado_productos = Producto.objects.all().order_by('-fecha')
 
-    #return render(request, 'productos/index.html', {
+    #return render(request, 'productos/productos.html', {
     #    'form': form,
     # 'listado_productos': listado_productos,
     #})
@@ -83,55 +83,11 @@ def buscar(request, template='productos/index.html', extra_context=None):
     
       
  
-
-
-
-def buscar2(request):
-    if request.GET.get('buscar') and  request.GET.get('region'):
-        page = request.GET.get('page')
-        #try:
-        buscar = request.GET['buscar']
-        region = request.GET['region']
-        form = SearchProducts() 
-       
-        objects = Producto.objects.filter(nombre=buscar).filter(region=region)
-        #newPagination(listado_productos, 25)
-            
-#        paginator = Paginator(listado_productos, 1)
-  
-#         try:
-#             productos = paginator.page(page)
-#         except PageNotAnInteger:
-#                 # If page is not an integer, deliver first page.
-#             productos = paginator.page(1)
-#         except EmptyPage:
-#                 # If page is out of range (e.g. 9999), deliver last page of results.
-#             productos = paginator.page(paginator.num_pages)
-            
-
-
-        return render_to_response('productos/index.html', {
-                                     'objects': objects,
-                                     'form': form,
-                                     'buscar': buscar,
-                                     'region': region,
-                                    }, context_instance=RequestContext(request))
-    
-    else:
-        
-        form = SearchProducts() # An unbound form
-        #listado_productos = Producto.objects.all().order_by('-fecha')
-
-    #return render(request, 'productos/index.html', {
-    #    'form': form,
-    # 'listado_productos': listado_productos,
-    #})
-        return HttpResponseRedirect('/productos/listar/')
         
     
 #def listar(request):
-@page_template('productos/index.html')  # just add this decorator
-def listar(request, template='productos/index.html', extra_context=None):
+@page_template('productos/productos.html')  # just add this decorator
+def listar(request, template='productos/productos.html', extra_context=None):
         
         form = SearchProducts()  
         context = {
@@ -149,32 +105,39 @@ def listar(request, template='productos/index.html', extra_context=None):
                                   template, context, context_instance=RequestContext(request))
     
       
-        
-  
-#         try:
-#             productos = paginator.page(page)
-#         except PageNotAnInteger:
-#                 # If page is not an integer, deliver first page.
-#             productos = paginator.page(1)
-#         except EmptyPage:
-#                 # If page is out of range (e.g. 9999), deliver last page of results.
-#             productos = paginator.page(paginator.num_pages)
-#         
-#        #print listado_productos,
-#         return render_to_response('productos/index.html', {
-#                                                         'listado_productos': listado_productos, 
-#                                                         'productos': productos,
-#                                                         'form': form,
-#                                                         #'buscar': buscar,
-#                                                         #'region': region,
-#                                                        
-#     }, context_instance=RequestContext(request))
-#         
-
+    
 
 def detalle(request, producto_id):
     producto = get_object_or_404(Producto, pk=producto_id)
-    return render(request, 'productos/detalle.html', {'producto': producto })
+    preguntas = Pregunta.objects.filter(producto=producto_id)
+    #preguntas = Respuesta.objects.all()
+        
+    
+    
+    if request.method == 'POST': # If the form has been submitted...
+        # ContactForm was defined in the previous section
+        form = PreguntaForm(request.POST) # A form bound to the POST data
+        if form.is_valid(): # All validation rules pass
+            pregunta = form.save(commit=False)
+            pregunta.producto = producto
+            pregunta.usuario = request.user
+            pregunta.save()
+    
+    else:
+        form = PreguntaForm() # An unbound form
+       
+        
+        #preguntas = Respuesta.objects.filter(producto=producto_id)
+        
+        #preguntas
+        #respuestas = Respuesta.objects.all()
+        
+        #preguntas = Pregunta.objects.all()
+
+    #return render(request, 'productos/agregar.html', {
+    #    'form': form,
+    #})
+    return render(request, 'productos/detalle.html', {'producto': producto, 'form':form, 'preguntas':preguntas })
 
 
 

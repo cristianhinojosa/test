@@ -25,6 +25,7 @@ $(document).ready(function(){
 	$(".form-agregar-productos input").addClass( "form-control" );
 	$("#id_imagen_1").removeClass( "form-control" );
 	
+	
 });
 </script>
 
@@ -47,6 +48,7 @@ $(document).ready(function(){
 	</form>
 {% else %}
 
+<form action="" method="post"  enctype="multipart/form-data">{% csrf_token %}
 	 <h2>Debe autentificarse primero</h2>
 
 	</form>

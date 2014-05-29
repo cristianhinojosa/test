@@ -13,23 +13,47 @@ class Migration(SchemaMigration):
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('nombre', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
             ('descripcion', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
-            ('valor', self.gf('django.db.models.fields.IntegerField')(default=0, null=True, blank=True)),
+            ('valor', self.gf('django.db.models.fields.PositiveIntegerField')(default=1, null=True, blank=True)),
             ('estado_producto', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
             ('estado_publicacion', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
             ('region', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
             ('usuario', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
-            ('fecha_inicio', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2014, 5, 27, 0, 0))),
-            ('fecha_termino', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2014, 8, 25, 0, 0))),
+            ('fecha_inicio', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2014, 5, 29, 0, 0))),
+            ('fecha_termino', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2014, 8, 27, 0, 0))),
             ('destacar', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
             ('categorias', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
             ('imagen_1', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
         ))
         db.send_create_signal(u'productos', ['Producto'])
 
+        # Adding model 'Pregunta'
+        db.create_table(u'productos_pregunta', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('usuario', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
+            ('producto', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['productos.Producto'], null=True, blank=True)),
+            ('pregunta', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
+        ))
+        db.send_create_signal(u'productos', ['Pregunta'])
+
+        # Adding model 'Respuesta'
+        db.create_table(u'productos_respuesta', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('pregunta', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['productos.Pregunta'], null=True, blank=True)),
+            ('producto', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['productos.Producto'], null=True, blank=True)),
+            ('respuesta', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
+        ))
+        db.send_create_signal(u'productos', ['Respuesta'])
+
 
     def backwards(self, orm):
         # Deleting model 'Producto'
         db.delete_table(u'productos_producto')
+
+        # Deleting model 'Pregunta'
+        db.delete_table(u'productos_pregunta')
+
+        # Deleting model 'Respuesta'
+        db.delete_table(u'productos_respuesta')
 
 
     models = {
@@ -69,6 +93,13 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
+        u'productos.pregunta': {
+            'Meta': {'object_name': 'Pregunta'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'pregunta': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
+            'producto': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['productos.Producto']", 'null': 'True', 'blank': 'True'}),
+            'usuario': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'null': 'True', 'blank': 'True'})
+        },
         u'productos.producto': {
             'Meta': {'object_name': 'Producto'},
             'categorias': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
@@ -76,14 +107,21 @@ class Migration(SchemaMigration):
             'destacar': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'estado_producto': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'estado_publicacion': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
-            'fecha_inicio': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2014, 5, 27, 0, 0)'}),
-            'fecha_termino': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2014, 8, 25, 0, 0)'}),
+            'fecha_inicio': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 5, 29, 0, 0)'}),
+            'fecha_termino': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 8, 27, 0, 0)'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'imagen_1': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
             'nombre': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'region': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'usuario': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'null': 'True', 'blank': 'True'}),
-            'valor': ('django.db.models.fields.IntegerField', [], {'default': '0', 'null': 'True', 'blank': 'True'})
+            'valor': ('django.db.models.fields.PositiveIntegerField', [], {'default': '1', 'null': 'True', 'blank': 'True'})
+        },
+        u'productos.respuesta': {
+            'Meta': {'object_name': 'Respuesta'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'pregunta': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['productos.Pregunta']", 'null': 'True', 'blank': 'True'}),
+            'producto': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['productos.Producto']", 'null': 'True', 'blank': 'True'}),
+            'respuesta': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'})
         }
     }
 

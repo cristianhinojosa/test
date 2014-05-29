@@ -104,14 +104,14 @@ class Producto(models.Model):
     
     nombre =  models.CharField(max_length=200, null=True, blank=True)
     descripcion = models.CharField(max_length=200, null=True, blank=True)
-    valor = models.IntegerField(default=0,  null=True, blank=True)
+    valor = models.PositiveIntegerField(default=1,  null=True, blank=True)
     estado_producto = models.CharField(max_length=200,choices=ESTADOS_PRODUCTO, null=True, blank=True)
     estado_publicacion = models.CharField(max_length=200,choices=ESTADOS_PUBLICACION, null=True, blank=True)
     region = models.CharField(max_length=200,choices=REGION_CHOICES,  null=True, blank=True)
     usuario = ForeignKey(User,  null=True, blank=True, editable=False) 
-    fecha_inicio = models.DateField(default=now, editable=False)
-    fecha_termino = models.DateField(default=future_days, editable=False)
-    destacar = models.CharField(max_length=200,choices=DESTACAR, null=True, blank=True, editable=True)
+    fecha_inicio = models.DateTimeField(default=now, editable=False)
+    fecha_termino = models.DateTimeField(default=future_days, editable=False)
+    destacar = models.CharField(max_length=200,choices=DESTACAR, null=True, blank=True)
     
     categorias = models.CharField(max_length=200,choices=CATEGORIAS, null=True, blank=True)
     
@@ -124,5 +124,29 @@ class Producto(models.Model):
     
     def __unicode__(self):
         return self.nombre
+
+
+class Pregunta(models.Model):
+    usuario = ForeignKey(User,  null=True, blank=True, editable=False)
+    producto = ForeignKey(Producto,  null=True, blank=True, editable=False) 
+    pregunta =  models.CharField(max_length=200, null=True, blank=True)
     
+    def __unicode__(self):
+        return self.pregunta
+
+class Respuesta(models.Model):
+    #usuario = ForeignKey(User,  null=True, blank=True, editable=False) 
+    #pregunta = models.OneToOneField(Pregunta)
+     
+    
+    pregunta = ForeignKey(Pregunta,  null=True, blank=True)
+    producto = ForeignKey(Producto,  null=True, blank=True, editable=False)
+    respuesta =  models.CharField(max_length=200, null=True, blank=True)
+    
+    def __unicode__(self):
+        return self.respuesta
+    
+    
+    
+
     

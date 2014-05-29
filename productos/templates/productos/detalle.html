@@ -1,16 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
 	
-	{{ producto.nombre }} <br>
+			{{ producto.nombre }} <br>
+		
+		
+		{{  producto.descripcion }}  <br>
+		
+		
+		{{  producto.valor }}  <br>
 
 
-{{  producto.descripcion }}  <br>
+
+{% if user.is_authenticated %}
+
+	<form action="" method="post"  enctype="multipart/form-data">{% csrf_token %}
+		<h2>Agregar una pregunta</h2>	
+		{{ form.as_p }}
+		<button class="btn btn-lg btn-primary btn-block">Enviar</button>
+	</form>
+	
+	
+	
+
+{% else %}
+
+	debe autentificarse primero<br>
+	
+
+  
 
 
-{{  producto.valor }}  <br>
 
 
-peladita
+{% endif %}		
+
+
+{% for pregunta in preguntas %}
+  {{ pregunta.pregunta }}<br>
+  
+{% endfor %}
+
 {% endblock %}
 <!--
 <ul>
