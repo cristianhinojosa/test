@@ -139,8 +139,9 @@ class Respuesta(models.Model):
     #pregunta = models.OneToOneField(Pregunta)
      
     
-    pregunta = ForeignKey(Pregunta,  null=True, blank=True)
-    producto = ForeignKey(Producto,  null=True, blank=True, editable=False)
+    #pregunta = ForeignKey(Pregunta,  null=True, blank=True)
+    pregunta = models.OneToOneField(Pregunta)
+    #producto = ForeignKey(Producto,  null=True, blank=True, editable=False)
     respuesta =  models.CharField(max_length=200, null=True, blank=True)
     
     def __unicode__(self):

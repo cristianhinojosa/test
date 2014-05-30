@@ -13,10 +13,7 @@ $(document).ready(function(){
 	$("#id_buscar").addClass("form-control");
 	$("#id_region").addClass("form-control");
 	  //$('.selector').bootstrapSelect(); 
-	  
-	  $("#id_region").selectpicker({
-
-});
+	  //$("#id_region").selectpicker({});
   
 	
 	
@@ -77,7 +74,7 @@ $(document).ready(function(){
 
 	
 		
-  	<tr class="cursor" data-href="" title="{% url 'productos:detalle' producto.id  %}" alt="{% url 'productos:detalle' producto.id  %}"> 
+  	<tr class="cursor" data-href="{% url 'productos:detalle' producto.id  %}" title="{% url 'productos:detalle' producto.id  %}" alt="{% url 'productos:detalle' producto.id  %}"> 
   		<td><a href="{% url 'productos:detalle' producto.id  %}">{{ producto.fecha_inicio|date:"m-d-Y" }}</a></td>
   		<td><a href="{% url 'productos:detalle' producto.id  %}">{{ producto.nombre }}</a></td>
 	

@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
+from django.forms.models import modelformset_factory
 
 from django.views.generic import TemplateView
 
@@ -12,7 +13,8 @@ from django.contrib.auth.decorators import login_required
 from forms import ProductoForm
 from django.core.urlresolvers import reverse_lazy
 from django.template.context import RequestContext
-from productos.forms import OtherProductoForm, SearchProducts, PreguntaForm
+from productos.forms import OtherProductoForm, SearchProducts, PreguntaForm,\
+    RespuestaForm
 from settings import HOME, MEDIA_URL
 #from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator, EmptyPage, InvalidPage,\
@@ -22,8 +24,8 @@ from django.core.exceptions import ObjectDoesNotExist
 import views
 
 
-from django.db import connection
-print connection.queries
+#from django.db import connection
+#print connection.queries
     
 #test->2.2.2.2
 
@@ -115,17 +117,31 @@ def detalle(request, producto_id):
     
     
     if request.method == 'POST': # If the form has been submitted...
-        # ContactForm was defined in the previous section
+        other_form = RespuestaForm(request.POST)
         form = PreguntaForm(request.POST) # A form bound to the POST data
-        if form.is_valid(): # All validation rules pass
-            pregunta = form.save(commit=False)
-            pregunta.producto = producto
-            pregunta.usuario = request.user
-            pregunta.save()
+        #other_form = modelformset_factory(Respuesta)
+        # ContactForm was defined in the previous section
+        if request.POST['action'] == 'respuesta':
+           
+            if  other_form.is_valid():
+                
+                respuesta = other_form.save(commit=False)
+                respuesta.save()
     
+            
+        if request.POST['action'] == 'pregunta': 
+           
+       
+            if form.is_valid(): # All validation rules pass
+                pregunta = form.save(commit=False)
+                pregunta.producto = producto
+                pregunta.usuario = request.user
+                pregunta.save()
+            
+     
     else:
         form = PreguntaForm() # An unbound form
-       
+        other_form = RespuestaForm()
         
         #preguntas = Respuesta.objects.filter(producto=producto_id)
         
@@ -137,7 +153,12 @@ def detalle(request, producto_id):
     #return render(request, 'productos/agregar.html', {
     #    'form': form,
     #})
-    return render(request, 'productos/detalle.html', {'producto': producto, 'form':form, 'preguntas':preguntas })
+    return render(request, 'productos/detalle.html', {
+                                                      'producto': producto, 
+                                                      'form':form,
+                                                       'other_form':other_form,
+                                                       'preguntas':preguntas
+                                                        })
 
 
 

@@ -6,6 +6,7 @@ urlpatterns = patterns('',
     # ex: /polls/
     url(r'^agregar$', views.agregar, name='agregar'),
 	url(r'^login/$', 'django.contrib.auth.views.login'),
+    url(r'^logout/$', 'django.contrib.auth.views.logout'),
 	#url(r'^panel/$', views.panel_usuario, name='panel_usuario'),
     url(r'^mis_productos/$', views.listar_mis_productos, name='listar_mis_productos')
     

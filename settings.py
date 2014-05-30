@@ -98,6 +98,18 @@ MANAGERS = ADMINS
 # }
 
 
+# DATABASES = {
+#     'default' : {
+#         'ENGINE' : 'django_mongodb_engine',
+#         'NAME' : 'my_database',
+#         'OPTIONS' : {
+#             
+#             'tz_aware' : True,
+#             #'slave_okay' : True,#'network_timeout' : 42,
+#         
+#         }
+#     }
+# }
 
 DATABASES = {
     'default': {
@@ -129,8 +141,8 @@ TIME_ZONE = 'America/Santiago'
 
 
 
+#SITE_ID = (u'5387e2721d41c81fa5c3b33b')
 SITE_ID = 1
-#SITE_ID = u'deafbeefdeadbeef00000000'
 
 
 # If you set this to False, Django will make some optimizations so as not

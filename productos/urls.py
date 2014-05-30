@@ -9,7 +9,7 @@ urlpatterns = patterns('',
   
    
     url(r'^producto/(?P<producto_id>\d+)/$', views.detalle, name='detalle'),
-   
+    #url(r'^producto/(?P<producto_id>[a-z\d]+)/$', views.detalle, name='detalle'),  #mongo_db
     url(r'^listar/$', views.listar, name='listar_productos'),
     url(r'^buscar/$', views.buscar, name='buscar_productos'),
     url(r'^agregar/$', views.AgregarProducto, name='agregar_producto'),

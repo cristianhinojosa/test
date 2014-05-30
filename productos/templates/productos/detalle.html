@@ -3,19 +3,34 @@
 	
 			{{ producto.nombre }} <br>
 		
-		
+		{{ producto.usuario }} 
 		{{  producto.descripcion }}  <br>
 		
 		
 		{{  producto.valor }}  <br>
 
 
+{% if producto.usuario.id == user.id %} 
 
+
+  Respuesta<br>
+  
+  	<form action="" method="post"  enctype="form-data">{% csrf_token %}
+		<h2>Agregar una Respuesta</h2>	
+		{{ other_form.as_p }}
+		<input type="hidden" name="action" value="respuesta">
+		<button class="btn btn-lg btn-primary btn-block">Enviar</button>
+	</form>
+  
+{% else %}
+
+		
 {% if user.is_authenticated %}
 
 	<form action="" method="post"  enctype="multipart/form-data">{% csrf_token %}
-		<h2>Agregar una pregunta</h2>	
+		<h2>Agregar una Pregunta</h2>	
 		{{ form.as_p }}
+		<input type="hidden" name="action" value="pregunta">
 		<button class="btn btn-lg btn-primary btn-block">Enviar</button>
 	</form>
 	
@@ -28,16 +43,23 @@
 	
 
   
-
-
-
-
 {% endif %}		
 
 
-{% for pregunta in preguntas %}
-  {{ pregunta.pregunta }}<br>
+	
+	
+
   
+{% endif %}		
+
+
+
+<h2>Preguntas</h2>
+
+{% for pregunta in preguntas %}
+  
+  		{{ pregunta.pregunta }} <br>
+
 {% endfor %}
 
 {% endblock %}
