@@ -22,12 +22,25 @@
     /* custom max width */
     max-width:320px;
 }
-.span12, .sidebar{
+.sidebar-blue{
 	background-color: #DCEAF4;
 }
 .table-responsive{
     overflow-x: auto;
 }
+
+#tabla_productos  tbody tr th{
+/* background-color: #F5F5F5; 
+background-color: #BFFF00;
+background-color: #96DCEE;
+* */
+
+background-color: #DCEAF4;
+}
+tabla_productos.table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th{
+	/* background-color: #BFFF00; */
+}
+
 
 body {
 	/* background-color: #EEEFFF; */

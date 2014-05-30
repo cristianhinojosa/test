@@ -1,7 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
 	
-			{{ producto.nombre }} <br>
+	
+<div class="col-sm-3 col-md-2 sidebar">
+		
+</div>	
+
+<div class="col-sm-8 table-responsive">
+
+{% if producto.usuario.id == user.id %} 
+	
+		{{ producto.nombre }} <br>
 		
 		{{ producto.usuario }} 
 		{{  producto.descripcion }}  <br>
@@ -9,11 +18,7 @@
 		
 		{{  producto.valor }}  <br>
 
-
-{% if producto.usuario.id == user.id %} 
-
-
-  Respuesta<br>
+	{% if respuesta.pregunta > 0 %}
   
   	<form action="" method="post"  enctype="form-data">{% csrf_token %}
 		<h2>Agregar una Respuesta</h2>	
@@ -21,8 +26,15 @@
 		<input type="hidden" name="action" value="respuesta">
 		<button class="btn btn-lg btn-primary btn-block">Enviar</button>
 	</form>
+  	{% endif %}
+  	
+  	
   
+
+  	
 {% else %}
+
+
 
 		
 {% if user.is_authenticated %}
@@ -33,6 +45,8 @@
 		<input type="hidden" name="action" value="pregunta">
 		<button class="btn btn-lg btn-primary btn-block">Enviar</button>
 	</form>
+	
+	
 	
 	
 	
@@ -48,19 +62,28 @@
 
 	
 	
-
   
 {% endif %}		
 
 
 
-<h2>Preguntas</h2>
+<h2>Preguntas del producto</h2>
 
 {% for pregunta in preguntas %}
   
-  		{{ pregunta.pregunta }} <br>
-
+Pregunta:		{{ pregunta.pregunta }} <br>
+Respuesta:		{{ pregunta.respuesta }}<br>
 {% endfor %}
+</div>
+
+
+
+	<div class="col-sm-2">
+		<img src="/media/baner/banner.jpeg">
+	</div>
+
+
+
 
 {% endblock %}
 <!--

@@ -64,8 +64,15 @@ class SearchProducts(forms.Form):
 class PreguntaForm(forms.ModelForm):
     class Meta:
         model = Pregunta   
+        exclude = ('producto')
+        
 
 class RespuestaForm(forms.ModelForm):
+    def __init__(self,  *args, **kwargs):
+        super(RespuestaForm, self).__init__(*args, **kwargs)
+        self.fields['pregunta'].queryset =  self.fields['pregunta'].queryset.exclude(respuesta__isnull=False)
+        #print  query
+    
     class Meta:
         model = Respuesta   
 

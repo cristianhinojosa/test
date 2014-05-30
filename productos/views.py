@@ -36,6 +36,8 @@ import user
 import settings
 from django.core.mail import send_mail
 from django.db.models.query_utils import Q
+from django.db.models.base import Empty
+from django import forms
 
 @page_template('productos/productos.html')  # just add this decorator
 def buscar(request, template='productos/productos.html', extra_context=None):
@@ -111,10 +113,29 @@ def listar(request, template='productos/productos.html', extra_context=None):
 
 def detalle(request, producto_id):
     producto = get_object_or_404(Producto, pk=producto_id)
-    preguntas = Pregunta.objects.filter(producto=producto_id)
-    #preguntas = Respuesta.objects.all()
-        
     
+    
+    preguntas = Pregunta.objects.filter(producto=producto_id)
+    respuestas = Respuesta.objects.filter(Q(pregunta_id__in=preguntas)).exclude(Q(respuesta__isnull=True))
+    
+  
+         
+    #print preguntas.query
+    
+    #for row in preguntas:
+       # preguntas = query
+       # preguntas  = respuestas
+        #list_for_template.append({'preguntas':query,'preguntas':respuestas})   
+    
+    
+    
+    
+    #print preguntas.list
+    #print preguntas.query
+    #print respuestas.query
+   
+ 
+       
     
     if request.method == 'POST': # If the form has been submitted...
         other_form = RespuestaForm(request.POST)
@@ -141,8 +162,9 @@ def detalle(request, producto_id):
      
     else:
         form = PreguntaForm() # An unbound form
-        other_form = RespuestaForm()
         
+        #other_form.base_fields['respuesta'] = forms.ModelChoiceField(queryset=respuesta__isnull=True)
+        other_form = RespuestaForm()
         #preguntas = Respuesta.objects.filter(producto=producto_id)
         
         #preguntas
@@ -157,7 +179,8 @@ def detalle(request, producto_id):
                                                       'producto': producto, 
                                                       'form':form,
                                                        'other_form':other_form,
-                                                       'preguntas':preguntas
+                                                       'preguntas':preguntas,
+                                                       #'respuestas': respuestas,
                                                         })
 
 

@@ -127,8 +127,10 @@ class Producto(models.Model):
 
 
 class Pregunta(models.Model):
+    
+    
     usuario = ForeignKey(User,  null=True, blank=True, editable=False)
-    producto = ForeignKey(Producto,  null=True, blank=True, editable=False) 
+    producto = ForeignKey(Producto,  null=True, blank=True) 
     pregunta =  models.CharField(max_length=200, null=True, blank=True)
     
     def __unicode__(self):
