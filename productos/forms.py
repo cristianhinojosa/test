@@ -70,7 +70,9 @@ class PreguntaForm(forms.ModelForm):
 class RespuestaForm(forms.ModelForm):
     def __init__(self,  *args, **kwargs):
         super(RespuestaForm, self).__init__(*args, **kwargs)
-        self.fields['pregunta'].queryset =  self.fields['pregunta'].queryset.exclude(respuesta__isnull=False)
+        self.fields['pregunta'].empty_label = None
+        self.fields['pregunta'].queryset =  self.fields['pregunta'].queryset.exclude(respuesta__isnull=False) 
+        #self.fields['pregunta'].empty_label = None
         #print  query
     
     class Meta:

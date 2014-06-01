@@ -18,9 +18,14 @@
 		
 		{{  producto.valor }}  <br>
 
-	{% if respuesta.pregunta > 0 %}
+<!--
+{{ other_form.pregunta  }}
+
+{{ other_form.pregunta |default_if_none:"nothing" }}
+-->
+	{% if other_form.pregunta > 0  %}
   
-  	<form action="" method="post"  enctype="form-data">{% csrf_token %}
+  	<form id="form_producto_respuesta" action="" method="post"  enctype="form-data">{% csrf_token %}
 		<h2>Agregar una Respuesta</h2>	
 		{{ other_form.as_p }}
 		<input type="hidden" name="action" value="respuesta">
@@ -39,7 +44,7 @@
 		
 {% if user.is_authenticated %}
 
-	<form action="" method="post"  enctype="multipart/form-data">{% csrf_token %}
+	<form id="form_producto_pregunta" action="" method="post"  enctype="multipart/form-data">{% csrf_token %}
 		<h2>Agregar una Pregunta</h2>	
 		{{ form.as_p }}
 		<input type="hidden" name="action" value="pregunta">
@@ -71,8 +76,8 @@
 
 {% for pregunta in preguntas %}
   
-Pregunta:		{{ pregunta.pregunta }} <br>
-Respuesta:		{{ pregunta.respuesta }}<br>
+{{ request.user }} Pregunta:		{{ pregunta.pregunta }} <br>
+{{ producto.usuario }}Responde:		{{ pregunta.respuesta }}<br>
 {% endfor %}
 </div>
 

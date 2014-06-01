@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$("form").addClass( "form-agregar-productos" );
+	/* $("form").addClass( "form-agregar-productos-2" ); */
 	$(".form-agregar-productos input").addClass( "form-control" );
 	$("#id_imagen_1").removeClass( "form-control" );
 	
@@ -14,6 +14,18 @@ $(document).ready(function(){
             window.location = $(this).attr('data-href'); 
         }); 
     }); 
+    
+ $("input[name='pregunta'], select[name='pregunta']", this).each(function() {
+        if ($(this).val() === '' || $(this).val() === null) {
+            
+           $('#form_producto_respuesta').remove(); 
+          
+        /*	
+         *  $(this).parent().parent().remove();
+         * $('.form-agregar-productos').remove();*/
+        }
+    });
+
 
 	
 	
